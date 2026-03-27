@@ -1,31 +1,30 @@
 ---
 import Layout from '../layouts/Layout.astro';
+const b = import.meta.env.BASE_URL;
 ---
 
 <Layout title="2026 Aston Martin Vantage — Private Sale">
 
-  <!-- Navigation -->
   <nav class="nav" role="navigation" aria-label="Main navigation">
-    <a href="/" class="nav-logo">V<span>antage</span></a>
+    <a href={b} class="nav-logo">V<span>antage</span></a>
     <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links">
-      <li><a href="/">Home</a></li>
-      <li><a href="/gallery">Gallery</a></li>
-      <li><a href="/specs">Specifications</a></li>
-      <li><a href="/contact" class="nav-cta">Inquire</a></li>
+      <li><a href={b}>Home</a></li>
+      <li><a href={`${b}gallery`}>Gallery</a></li>
+      <li><a href={`${b}specs`}>Specifications</a></li>
+      <li><a href={`${b}contact`} class="nav-cta">Inquire</a></li>
     </ul>
   </nav>
 
-  <!-- Hero -->
   <section class="hero" aria-label="Hero">
     <div class="hero-video-wrap">
       <video autoplay muted loop playsinline
-             poster="/hero_poster.jpg"
+             poster={`${b}hero_poster.jpg`}
              aria-hidden="true">
-        <source src="/videos/outside/IMG_8121.mp4" type="video/mp4" />
-        <source src="/videos/outside/IMG_8122.mp4" type="video/mp4" />
+        <source src={`${b}videos/outside/IMG_8121.mp4`} type="video/mp4" />
+        <source src={`${b}videos/outside/IMG_8122.mp4`} type="video/mp4" />
       </video>
     </div>
     <div class="hero-overlay"></div>
@@ -34,13 +33,12 @@ import Layout from '../layouts/Layout.astro';
       <h1 class="hero-title">2026 Aston Martin<br />Vantage Coupe</h1>
       <p class="hero-sub">656 HP &nbsp;&middot;&nbsp; 2,400 Miles &nbsp;&middot;&nbsp; $199,000 &nbsp;&middot;&nbsp; Full Factory Warranty</p>
       <div class="hero-actions">
-        <a href="/gallery" class="btn btn-primary">View Gallery</a>
-        <a href="/contact" class="btn btn-outline">Inquire</a>
+        <a href={`${b}gallery`} class="btn btn-primary">View Gallery</a>
+        <a href={`${b}contact`} class="btn btn-outline">Inquire</a>
       </div>
     </div>
   </section>
 
-  <!-- Stats Bar -->
   <div class="stats-bar" aria-label="Key figures">
     <div class="container">
       <div class="stats-grid">
@@ -60,36 +58,24 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </div>
 
-  <!-- Overview -->
   <section class="overview">
     <div class="container">
       <div class="overview-grid">
         <div class="overview-text fade-in">
           <p class="label">Why This Car</p>
           <h2>The New-Generation Vantage</h2>
-          <p>
-            This is the completely redesigned Vantage — launched for 2025 with a <strong>155hp increase</strong> over the outgoing model, a new interior, and a chassis that reviewers have called the best-driving Aston Martin in a decade.
-          </p>
-          <p>
-            Jet Black over Onyx Black Haircalf Leather with AMR Lime accents is a striking, tasteful spec that avoids the common silver and gray configurations flooding the market. At <strong>$199,000</strong>, this represents a $23,800 saving over the original sticker on an essentially unworn car.
-          </p>
-          <p>
-            Original owner. Clean title in hand. <strong>3-year unlimited-mileage factory warranty</strong> transfers to the new owner at no cost. Serious inquiries only &mdash; proof of funds required before scheduling a viewing.
-          </p>
-          <a href="/specs" class="btn btn-outline" style="margin-top:1rem;">Full Specifications</a>
+          <p>This is the completely redesigned Vantage — launched for 2025 with a <strong>155hp increase</strong> over the outgoing model, a new interior, and a chassis that reviewers have called the best-driving Aston Martin in a decade.</p>
+          <p>Jet Black over Onyx Black Haircalf Leather with AMR Lime accents is a striking, tasteful spec. At <strong>$199,000</strong>, this represents a $23,800 saving over the original sticker on an essentially unworn car.</p>
+          <p>Original owner. Clean title in hand. <strong>3-year unlimited-mileage factory warranty</strong> transfers to the new owner at no cost.</p>
+          <a href={`${b}specs`} class="btn btn-outline" style="margin-top:1rem;">Full Specifications</a>
         </div>
         <div class="overview-image fade-in fade-in-delay-1">
-          <img
-            src="/photos/IMG_8136.JPG"
-            alt="2026 Aston Martin Vantage — Jet Black, front three-quarter view"
-            loading="lazy"
-          />
+          <img src={`${b}photos/IMG_8136.JPG`} alt="2026 Aston Martin Vantage — Jet Black, front three-quarter view" loading="lazy" />
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Preview Grid -->
   <section class="preview-grid-section">
     <div class="container">
       <div class="section-header fade-in">
@@ -97,34 +83,22 @@ import Layout from '../layouts/Layout.astro';
         <h2>Jet Black &amp; AMR Lime</h2>
       </div>
       <div class="preview-grid fade-in">
-        <div class="preview-grid-wrap">
-          <img src="/photos/IMG_8137.JPG" alt="Aston Martin Vantage exterior" loading="lazy" />
-        </div>
-        <div class="preview-grid-wrap">
-          <img src="/photos/IMG_8167.JPG" alt="Aston Martin Vantage side profile" loading="lazy" />
-        </div>
-        <div class="preview-grid-wrap">
-          <img src="/photos/IMG_8190.JPG" alt="Aston Martin Vantage interior" loading="lazy" />
-        </div>
-        <div class="preview-grid-wrap">
-          <img src="/photos/IMG_8196.JPG" alt="Aston Martin Vantage detail" loading="lazy" />
-        </div>
+        <div class="preview-grid-wrap"><img src={`${b}photos/IMG_8137.JPG`} alt="Aston Martin Vantage exterior" loading="lazy" /></div>
+        <div class="preview-grid-wrap"><img src={`${b}photos/IMG_8167.JPG`} alt="Aston Martin Vantage side profile" loading="lazy" /></div>
+        <div class="preview-grid-wrap"><img src={`${b}photos/IMG_8190.JPG`} alt="Aston Martin Vantage interior" loading="lazy" /></div>
+        <div class="preview-grid-wrap"><img src={`${b}photos/IMG_8196.JPG`} alt="Aston Martin Vantage detail" loading="lazy" /></div>
       </div>
       <div class="text-center fade-in">
-        <a href="/gallery" class="btn btn-primary">View Full Gallery</a>
+        <a href={`${b}gallery`} class="btn btn-primary">View Full Gallery</a>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
   <footer>
     <div class="container">
       <p class="footer-logo">Vantage</p>
       <p>2026 Aston Martin Vantage Coupe &mdash; VIN: SCFSMGFW8TGN10773</p>
-      <p style="margin-top:0.5rem;">
-        Chicagoland, IL &nbsp;&middot;&nbsp; Private Sale &nbsp;&middot;&nbsp;
-        <a href="/contact" style="color:var(--lime);">Contact for Inquiries</a>
-      </p>
+      <p style="margin-top:0.5rem;">Chicagoland, IL &nbsp;&middot;&nbsp; Private Sale &nbsp;&middot;&nbsp; <a href={`${b}contact`} style="color:var(--lime);">Contact for Inquiries</a></p>
     </div>
   </footer>
 

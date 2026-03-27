@@ -1,29 +1,25 @@
 ---
 import Layout from '../layouts/Layout.astro';
+const b = import.meta.env.BASE_URL;
 ---
 
-<Layout
-  title="Specifications — 2026 Aston Martin Vantage"
-  description="Full specifications and pricing for the 2026 Aston Martin Vantage Coupe. 656hp, $199,000, full factory warranty."
->
+<Layout title="Specifications — 2026 Aston Martin Vantage" description="Full specifications and pricing for the 2026 Aston Martin Vantage Coupe. 656hp, $199,000, full factory warranty.">
 
-  <!-- Navigation -->
   <nav class="nav scrolled" role="navigation" aria-label="Main navigation">
-    <a href="/" class="nav-logo">V<span>antage</span></a>
+    <a href={b} class="nav-logo">V<span>antage</span></a>
     <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links">
-      <li><a href="/">Home</a></li>
-      <li><a href="/gallery">Gallery</a></li>
-      <li><a href="/specs">Specifications</a></li>
-      <li><a href="/contact" class="nav-cta">Inquire</a></li>
+      <li><a href={b}>Home</a></li>
+      <li><a href={`${b}gallery`}>Gallery</a></li>
+      <li><a href={`${b}specs`}>Specifications</a></li>
+      <li><a href={`${b}contact`} class="nav-cta">Inquire</a></li>
     </ul>
   </nav>
 
-  <!-- Page Hero -->
   <div class="page-hero">
-    <img src="/photos/IMG_8173.JPG" alt="2026 Aston Martin Vantage specifications" loading="eager" />
+    <img src={`${b}photos/IMG_8173.JPG`} alt="2026 Aston Martin Vantage specifications" loading="eager" />
     <div class="page-hero-overlay"></div>
     <div class="page-hero-content">
       <p class="label">Complete Details</p>
@@ -31,12 +27,9 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </div>
 
-  <!-- Specs Content -->
   <section style="background:var(--bg);">
     <div class="container">
       <div class="specs-layout">
-
-        <!-- Sidebar Nav -->
         <aside class="specs-sidebar">
           <ul class="specs-nav" role="list">
             <li><a href="#overview">Overview</a></li>
@@ -49,8 +42,6 @@ import Layout from '../layouts/Layout.astro';
             <li><a href="#pricing">Pricing</a></li>
           </ul>
         </aside>
-
-        <!-- Specs Content -->
         <div class="specs-content">
 
           <div id="overview" class="spec-section fade-in">
@@ -77,7 +68,7 @@ import Layout from '../layouts/Layout.astro';
               <tr><td>Differential</td><td>Electronic rear differential with Dynamic Torque Vectoring</td></tr>
               <tr><td>Propshaft</td><td>Carbon fiber, via alloy torque tube</td></tr>
               <tr><td>Drive Modes</td><td>Sport, Sport+, Track, Wet, Individual</td></tr>
-              <tr><td>Traction Systems</td><td>DSC (Dynamic Stability Control), TC (Traction Control), PTC (Positive Traction Control)</td></tr>
+              <tr><td>Traction Systems</td><td>DSC, TC, PTC</td></tr>
             </table>
           </div>
 
@@ -93,7 +84,7 @@ import Layout from '../layouts/Layout.astro';
               <tr><td>Tail Lamps</td><td>Smoked</td></tr>
               <tr><td>Grille Vanes</td><td>Black</td></tr>
               <tr><td>Wings Badge</td><td>Black</td></tr>
-              <tr><td>Mirrors</td><td>Power-folding, heated, body-color</td></tr>
+              <tr><td>Mirrors</td><td>Power-folding, heated</td></tr>
             </table>
           </div>
 
@@ -101,7 +92,7 @@ import Layout from '../layouts/Layout.astro';
             <h3>Interior</h3>
             <table class="spec-table">
               <tr><td>Upholstery</td><td>Onyx Black Haircalf Leather (RB981)</td></tr>
-              <tr><td>Seats</td><td>12-way power-adjustable, heated front seats, 3-position memory</td></tr>
+              <tr><td>Seats</td><td>12-way power-adjustable, heated, 3-position memory</td></tr>
               <tr><td>Steering Column</td><td>Power-adjustable tilt/telescoping</td></tr>
               <tr><td>Interior Mirror</td><td>Auto-dimming</td></tr>
               <tr><td>Ambient Lighting</td><td>Included</td></tr>
@@ -150,39 +141,16 @@ import Layout from '../layouts/Layout.astro';
           <div id="pricing" class="spec-section fade-in">
             <h3>Pricing</h3>
             <div class="pricing-table">
-              <div class="pricing-row">
-                <span class="label-left">Base MSRP</span>
-                <span class="amount">$191,000</span>
-              </div>
-              <div class="pricing-row">
-                <span class="label-left">Factory Options</span>
-                <span class="amount">$21,100</span>
-              </div>
-              <div class="pricing-row">
-                <span class="label-left">Import Costs</span>
-                <span class="amount">$6,700</span>
-              </div>
-              <div class="pricing-row">
-                <span class="label-left">Transportation &amp; Handling</span>
-                <span class="amount">$3,500</span>
-              </div>
-              <div class="pricing-row total">
-                <span class="label-left">Total Original MSRP</span>
-                <span class="amount">$222,800</span>
-              </div>
-              <div class="pricing-row asking">
-                <span class="label-left">Asking Price</span>
-                <span class="amount">$199,000</span>
-              </div>
-              <div class="pricing-row savings">
-                <span class="label-left">Savings vs. original MSRP</span>
-                <span class="amount">$23,800 below sticker</span>
-              </div>
+              <div class="pricing-row"><span class="label-left">Base MSRP</span><span class="amount">$191,000</span></div>
+              <div class="pricing-row"><span class="label-left">Factory Options</span><span class="amount">$21,100</span></div>
+              <div class="pricing-row"><span class="label-left">Import Costs</span><span class="amount">$6,700</span></div>
+              <div class="pricing-row"><span class="label-left">Transportation &amp; Handling</span><span class="amount">$3,500</span></div>
+              <div class="pricing-row total"><span class="label-left">Total Original MSRP</span><span class="amount">$222,800</span></div>
+              <div class="pricing-row asking"><span class="label-left">Asking Price</span><span class="amount">$199,000</span></div>
+              <div class="pricing-row savings"><span class="label-left">Savings vs. original MSRP</span><span class="amount">$23,800 below sticker</span></div>
             </div>
-            <p style="margin-top:1.5rem;font-size:0.8rem;color:var(--text-dim);">
-              Original window sticker included. Serious inquiries only — proof of funds required before scheduling a viewing.
-            </p>
-            <a href="/contact" class="btn btn-primary" style="margin-top:1.5rem;">Inquire Now</a>
+            <p style="margin-top:1.5rem;font-size:0.8rem;color:var(--text-dim);">Original window sticker included. Serious inquiries only — proof of funds required before scheduling a viewing.</p>
+            <a href={`${b}contact`} class="btn btn-primary" style="margin-top:1.5rem;">Inquire Now</a>
           </div>
 
         </div>
@@ -190,15 +158,11 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <!-- Footer -->
   <footer>
     <div class="container">
       <p class="footer-logo">Vantage</p>
       <p>2026 Aston Martin Vantage Coupe &mdash; VIN: SCFSMGFW8TGN10773</p>
-      <p style="margin-top:0.5rem;">
-        Chicagoland, IL &nbsp;&middot;&nbsp;
-        <a href="/contact" style="color:var(--lime);">Contact for Inquiries</a>
-      </p>
+      <p style="margin-top:0.5rem;">Chicagoland, IL &nbsp;&middot;&nbsp; <a href={`${b}contact`} style="color:var(--lime);">Contact for Inquiries</a></p>
     </div>
   </footer>
 

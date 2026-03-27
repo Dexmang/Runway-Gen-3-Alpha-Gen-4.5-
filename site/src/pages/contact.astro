@@ -1,29 +1,25 @@
 ---
 import Layout from '../layouts/Layout.astro';
+const b = import.meta.env.BASE_URL;
 ---
 
-<Layout
-  title="Inquire — 2026 Aston Martin Vantage"
-  description="Inquire about the 2026 Aston Martin Vantage Coupe. Private sale, Chicagoland IL. Serious buyers only — proof of funds required."
->
+<Layout title="Inquire — 2026 Aston Martin Vantage" description="Inquire about the 2026 Aston Martin Vantage Coupe. Private sale, Chicagoland IL. Serious buyers only.">
 
-  <!-- Navigation -->
   <nav class="nav scrolled" role="navigation" aria-label="Main navigation">
-    <a href="/" class="nav-logo">V<span>antage</span></a>
+    <a href={b} class="nav-logo">V<span>antage</span></a>
     <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links">
-      <li><a href="/">Home</a></li>
-      <li><a href="/gallery">Gallery</a></li>
-      <li><a href="/specs">Specifications</a></li>
-      <li><a href="/contact" class="nav-cta">Inquire</a></li>
+      <li><a href={b}>Home</a></li>
+      <li><a href={`${b}gallery`}>Gallery</a></li>
+      <li><a href={`${b}specs`}>Specifications</a></li>
+      <li><a href={`${b}contact`} class="nav-cta">Inquire</a></li>
     </ul>
   </nav>
 
-  <!-- Page Hero -->
   <div class="page-hero">
-    <img src="/photos/IMG_8199.JPG" alt="2026 Aston Martin Vantage" loading="eager" />
+    <img src={`${b}photos/IMG_8199.JPG`} alt="2026 Aston Martin Vantage" loading="eager" />
     <div class="page-hero-overlay"></div>
     <div class="page-hero-content">
       <p class="label">Private Sale</p>
@@ -31,53 +27,24 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </div>
 
-  <!-- Contact -->
   <section style="background:var(--bg);">
     <div class="container">
       <div class="contact-layout">
-
-        <!-- Info -->
         <div class="contact-info fade-in">
           <p class="label">Get in Touch</p>
           <h2>Serious Inquiries Only</h2>
-          <p>
-            This vehicle is offered via private sale by the original owner. We pre-qualify every inquiry — proof of funds is required before scheduling a viewing. No tire-kickers.
-          </p>
-          <p>
-            The factory warranty transfers to the new owner at no cost. Clean title is in hand. The car is located in the Chicagoland area and available for viewing by appointment.
-          </p>
-
+          <p>This vehicle is offered via private sale by the original owner. Proof of funds is required before scheduling a viewing.</p>
+          <p>The factory warranty transfers to the new owner at no cost. Clean title is in hand. Located in the Chicagoland area, available for viewing by appointment.</p>
           <ul class="contact-details">
-            <li>
-              <span class="detail-label">Location</span>
-              <span class="detail-value">Chicagoland, Illinois</span>
-            </li>
-            <li>
-              <span class="detail-label">VIN</span>
-              <span class="detail-value">SCFSMGFW8TGN10773</span>
-            </li>
-            <li>
-              <span class="detail-label">Title</span>
-              <span class="detail-value">Clean — in hand</span>
-            </li>
-            <li>
-              <span class="detail-label">Warranty</span>
-              <span class="detail-value">3 years, unlimited mileage — transfers at no cost</span>
-            </li>
-            <li>
-              <span class="detail-label">Seller</span>
-              <span class="detail-value">Original owner</span>
-            </li>
-            <li>
-              <span class="detail-label">Payment</span>
-              <span class="detail-value">Wire transfer, certified check, or escrow service</span>
-            </li>
+            <li><span class="detail-label">Location</span><span class="detail-value">Chicagoland, Illinois</span></li>
+            <li><span class="detail-label">VIN</span><span class="detail-value">SCFSMGFW8TGN10773</span></li>
+            <li><span class="detail-label">Title</span><span class="detail-value">Clean — in hand</span></li>
+            <li><span class="detail-label">Warranty</span><span class="detail-value">3 years, unlimited mileage — transfers at no cost</span></li>
+            <li><span class="detail-label">Seller</span><span class="detail-value">Original owner</span></li>
+            <li><span class="detail-label">Payment</span><span class="detail-value">Wire transfer, certified check, or escrow</span></li>
           </ul>
-
-          <a href="/specs" class="btn btn-outline">View Full Specifications</a>
+          <a href={`${b}specs`} class="btn btn-outline">View Full Specifications</a>
         </div>
-
-        <!-- Form -->
         <div class="fade-in fade-in-delay-1">
           <form class="contact-form" id="inquiryForm" novalidate>
             <div class="form-group">
@@ -106,42 +73,25 @@ import Layout from '../layouts/Layout.astro';
               <label for="message">Message</label>
               <textarea id="message" name="message" placeholder="Questions, timeline, viewing availability..."></textarea>
             </div>
-            <p class="form-note">
-              Proof of funds will be requested before scheduling a viewing. Responses within 24 hours.
-            </p>
+            <p class="form-note">Proof of funds will be requested before scheduling a viewing. Responses within 24 hours.</p>
             <button type="submit" class="btn btn-primary" style="width:100%;">Submit Inquiry</button>
           </form>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- Key Facts -->
   <div class="key-facts">
     <div class="container">
       <div class="facts-grid">
-        <div class="fact-item fade-in">
-          <div class="fact-label">Engine</div>
-          <div class="fact-value">4.0L TT V8 · 656hp</div>
-        </div>
-        <div class="fact-item fade-in fade-in-delay-1">
-          <div class="fact-label">Mileage</div>
-          <div class="fact-value">~2,400 miles</div>
-        </div>
-        <div class="fact-item fade-in fade-in-delay-2">
-          <div class="fact-label">Warranty</div>
-          <div class="fact-value">3yr / Unlimited mi</div>
-        </div>
-        <div class="fact-item fade-in fade-in-delay-3">
-          <div class="fact-label">Asking Price</div>
-          <div class="fact-value" style="color:var(--lime);">$199,000</div>
-        </div>
+        <div class="fact-item fade-in"><div class="fact-label">Engine</div><div class="fact-value">4.0L TT V8 · 656hp</div></div>
+        <div class="fact-item fade-in fade-in-delay-1"><div class="fact-label">Mileage</div><div class="fact-value">~2,400 miles</div></div>
+        <div class="fact-item fade-in fade-in-delay-2"><div class="fact-label">Warranty</div><div class="fact-value">3yr / Unlimited mi</div></div>
+        <div class="fact-item fade-in fade-in-delay-3"><div class="fact-label">Asking Price</div><div class="fact-value" style="color:var(--lime);">$199,000</div></div>
       </div>
     </div>
   </div>
 
-  <!-- Footer -->
   <footer>
     <div class="container">
       <p class="footer-logo">Vantage</p>

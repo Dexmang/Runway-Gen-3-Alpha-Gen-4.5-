@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+const b = import.meta.env.BASE_URL;
 
 const photos = [
   'IMG_8136','IMG_8137','IMG_8138','IMG_8139','IMG_8140','IMG_8141','IMG_8142',
@@ -9,40 +10,35 @@ const photos = [
 ];
 
 const outsideVideos = [
-  { src: '/videos/outside/IMG_8121.mp4', label: 'Exterior · Clip 1' },
-  { src: '/videos/outside/IMG_8122.mp4', label: 'Exterior · Clip 2' },
-  { src: '/videos/outside/IMG_8131.mp4', label: 'Exterior · Clip 3' },
+  { src: `${b}videos/outside/IMG_8121.mp4`, label: 'Exterior · Clip 1' },
+  { src: `${b}videos/outside/IMG_8122.mp4`, label: 'Exterior · Clip 2' },
+  { src: `${b}videos/outside/IMG_8131.mp4`, label: 'Exterior · Clip 3' },
 ];
 
 const insideVideos = [
-  { src: '/videos/inside/IMG_7063.mp4', label: 'Interior · Clip 1', poster: '/photos/IMG_8190.JPG' },
-  { src: '/videos/inside/IMG_7064.mp4', label: 'Interior · Clip 2', poster: '/photos/IMG_8191.JPG' },
-  { src: '/videos/inside/IMG_7065.mp4', label: 'Interior · Clip 3', poster: '/photos/IMG_8192.JPG' },
+  { src: `${b}videos/inside/IMG_7063.mp4`, label: 'Interior · Clip 1', poster: `${b}photos/IMG_8190.JPG` },
+  { src: `${b}videos/inside/IMG_7064.mp4`, label: 'Interior · Clip 2', poster: `${b}photos/IMG_8191.JPG` },
+  { src: `${b}videos/inside/IMG_7065.mp4`, label: 'Interior · Clip 3', poster: `${b}photos/IMG_8192.JPG` },
 ];
 ---
 
-<Layout
-  title="Gallery — 2026 Aston Martin Vantage"
-  description="Photo and video gallery of the 2026 Aston Martin Vantage Coupe for private sale."
->
+<Layout title="Gallery — 2026 Aston Martin Vantage" description="Photo and video gallery of the 2026 Aston Martin Vantage Coupe for private sale.">
 
-  <!-- Navigation -->
   <nav class="nav scrolled" role="navigation" aria-label="Main navigation">
-    <a href="/" class="nav-logo">V<span>antage</span></a>
+    <a href={b} class="nav-logo">V<span>antage</span></a>
     <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links">
-      <li><a href="/">Home</a></li>
-      <li><a href="/gallery">Gallery</a></li>
-      <li><a href="/specs">Specifications</a></li>
-      <li><a href="/contact" class="nav-cta">Inquire</a></li>
+      <li><a href={b}>Home</a></li>
+      <li><a href={`${b}gallery`}>Gallery</a></li>
+      <li><a href={`${b}specs`}>Specifications</a></li>
+      <li><a href={`${b}contact`} class="nav-cta">Inquire</a></li>
     </ul>
   </nav>
 
-  <!-- Page Hero -->
   <div class="page-hero">
-    <img src="/photos/IMG_8138.JPG" alt="2026 Aston Martin Vantage" loading="eager" />
+    <img src={`${b}photos/IMG_8138.JPG`} alt="2026 Aston Martin Vantage" loading="eager" />
     <div class="page-hero-overlay"></div>
     <div class="page-hero-content">
       <p class="label">Visual Overview</p>
@@ -50,7 +46,6 @@ const insideVideos = [
     </div>
   </div>
 
-  <!-- Video Section -->
   <section class="video-section">
     <div class="container">
       <div class="section-header fade-in">
@@ -61,9 +56,8 @@ const insideVideos = [
       <p class="label" style="margin-bottom:1.2rem;">Exterior</p>
       <div class="video-grid" style="margin-bottom:3rem;">
         {outsideVideos.map((v, i) => (
-          <div class={`video-thumb fade-in${i > 0 ? ` fade-in-delay-${i}` : ''}`}
-               data-src={v.src}>
-            <img src="/hero_poster.jpg" alt={v.label} loading="lazy" />
+          <div class={`video-thumb fade-in${i > 0 ? ` fade-in-delay-${i}` : ''}`} data-src={v.src}>
+            <img src={`${b}hero_poster.jpg`} alt={v.label} loading="lazy" />
             <div class="video-play-btn">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                 <circle cx="12" cy="12" r="11" fill="rgba(0,0,0,0.5)" stroke="rgba(255,255,255,0.4)" stroke-width="0.5"/>
@@ -78,8 +72,7 @@ const insideVideos = [
       <p class="label" style="margin-bottom:1.2rem;">Interior</p>
       <div class="video-grid">
         {insideVideos.map((v, i) => (
-          <div class={`video-thumb fade-in${i > 0 ? ` fade-in-delay-${i}` : ''}`}
-               data-src={v.src}>
+          <div class={`video-thumb fade-in${i > 0 ? ` fade-in-delay-${i}` : ''}`} data-src={v.src}>
             <img src={v.poster} alt={v.label} loading="lazy" />
             <div class="video-play-btn">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -94,20 +87,18 @@ const insideVideos = [
     </div>
   </section>
 
-  <!-- Photo Gallery -->
   <section class="photo-section">
     <div class="container">
       <div class="section-header fade-in">
         <p class="label">Photography</p>
         <h2>All 26 Photos</h2>
       </div>
-
       <div class="photo-grid">
         {photos.map((name, i) => (
           <div class="photo-item fade-in">
             <img
-              src={`/thumbs/${name}.JPG`}
-              data-full={`/photos/${name}.JPG`}
+              src={`${b}thumbs/${name}.JPG`}
+              data-full={`${b}photos/${name}.JPG`}
               alt={`Vantage photo ${i + 1}`}
               loading="lazy"
             />
@@ -117,19 +108,14 @@ const insideVideos = [
     </div>
   </section>
 
-  <!-- Footer -->
   <footer>
     <div class="container">
       <p class="footer-logo">Vantage</p>
       <p>2026 Aston Martin Vantage Coupe &mdash; VIN: SCFSMGFW8TGN10773</p>
-      <p style="margin-top:0.5rem;">
-        Chicagoland, IL &nbsp;&middot;&nbsp;
-        <a href="/contact" style="color:var(--lime);">Contact for Inquiries</a>
-      </p>
+      <p style="margin-top:0.5rem;">Chicagoland, IL &nbsp;&middot;&nbsp; <a href={`${b}contact`} style="color:var(--lime);">Contact for Inquiries</a></p>
     </div>
   </footer>
 
-  <!-- Lightbox -->
   <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox">
     <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
     <div class="lightbox-inner">
@@ -140,7 +126,6 @@ const insideVideos = [
     <div class="lightbox-counter" aria-live="polite"></div>
   </div>
 
-  <!-- Video Modal -->
   <div id="videoModal" class="video-modal" role="dialog" aria-modal="true" aria-label="Video player">
     <button class="video-modal-close" aria-label="Close video">&times;</button>
     <div class="video-modal-inner">

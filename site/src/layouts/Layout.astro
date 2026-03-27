@@ -4,14 +4,14 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
-  ogImage?: string;
 }
 
 const {
   title,
   description = '2026 Aston Martin Vantage Coupe. 656hp. 2,400 miles. Jet Black over Onyx Haircalf. $199,000. Full factory warranty. Private sale, Chicagoland.',
-  ogImage = '/hero_poster.jpg',
 } = Astro.props;
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <!doctype html>
@@ -23,7 +23,7 @@ const {
     <meta name="description" content={description} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={`${base}hero_poster.jpg`} />
     <meta property="og:type" content="website" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
