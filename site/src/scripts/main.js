@@ -1,33 +1,37 @@
 /* ============================================================
    ASTON MARTIN VANTAGE — LISTING SITE
-   main.js — Navigation, Lightbox, Video Modal, Animations
+   main.js — Navigation, Lightbox, Video Modal, Gallery Filters
    ============================================================ */
 
 /* --- Navigation --- */
 (function () {
-  const nav = document.querySelector('.nav');
+  const nav    = document.querySelector('.nav');
   const toggle = document.querySelector('.nav-toggle');
-  const links = document.querySelector('.nav-links');
+  const links  = document.querySelector('.nav-links');
 
-  // Scroll: make nav solid
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 60) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-    }
+    nav.classList.toggle('scrolled', window.scrollY > 60);
   });
 
-  // Mobile toggle
   if (toggle && links) {
     toggle.addEventListener('click', () => {
-      links.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', links.classList.contains('open'));
+      const open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open);
     });
 
-    // Close on link click
     links.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => links.classList.remove('open'));
+      a.addEventListener('click', () => {
+        links.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Close on outside click
+    document.addEventListener('click', e => {
+      if (links.classList.contains('open') && !nav.contains(e.target)) {
+        links.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
     });
   }
 
@@ -58,51 +62,103 @@
   els.forEach(el => observer.observe(el));
 })();
 
-/* --- Photo Lightbox --- */
+/* --- Gallery Photo Filters --- */
 (function () {
-  const lightbox     = document.getElementById('lightbox');
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  if (!filterBtns.length) return;
+
+  const allPhotos  = Array.from(document.querySelectorAll('.photo-item'));
+  const emptyMsg   = document.querySelector('.gallery-empty');
+
+  // Populate filter counts
+  filterBtns.forEach(btn => {
+    const f = btn.dataset.filter;
+    const count = f === 'all'
+      ? allPhotos.length
+      : allPhotos.filter(p => p.dataset.category === f).length;
+    const span = btn.querySelector('.filter-count');
+    if (span) span.textContent = `(${count})`;
+  });
+
+  function applyFilter(filter) {
+    let visible = 0;
+    allPhotos.forEach(p => {
+      const show = filter === 'all' || p.dataset.category === filter;
+      p.classList.toggle('photo-hidden', !show);
+      if (show) visible++;
+    });
+    if (emptyMsg) emptyMsg.style.display = visible === 0 ? 'block' : 'none';
+
+    filterBtns.forEach(btn => {
+      const active = btn.dataset.filter === filter;
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-selected', active);
+    });
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => applyFilter(btn.dataset.filter));
+  });
+})();
+
+/* --- Photo Lightbox (filter-aware) --- */
+(function () {
+  const lightbox  = document.getElementById('lightbox');
   if (!lightbox) return;
 
-  const lbImg        = lightbox.querySelector('.lightbox-img');
-  const lbClose      = lightbox.querySelector('.lightbox-close');
-  const lbPrev       = lightbox.querySelector('.lightbox-prev');
-  const lbNext       = lightbox.querySelector('.lightbox-next');
-  const lbCounter    = lightbox.querySelector('.lightbox-counter');
-  const photos       = Array.from(document.querySelectorAll('.photo-item'));
-  let current        = 0;
+  const lbImg     = lightbox.querySelector('.lightbox-img');
+  const lbClose   = lightbox.querySelector('.lightbox-close');
+  const lbPrev    = lightbox.querySelector('.lightbox-prev');
+  const lbNext    = lightbox.querySelector('.lightbox-next');
+  const lbCounter = lightbox.querySelector('.lightbox-counter');
+  const allPhotos = Array.from(document.querySelectorAll('.photo-item'));
+  let currentEl   = null;
 
-  function openLightbox(idx) {
-    current = idx;
-    const img = photos[idx].querySelector('img');
-    lbImg.src = img.dataset.full || img.src.replace('/thumbs/', '/photos/');
+  function visiblePhotos() {
+    return allPhotos.filter(p => !p.classList.contains('photo-hidden'));
+  }
+
+  function openLightbox(el) {
+    currentEl = el;
+    const img = el.querySelector('img');
+    lbImg.src = img.dataset.full || img.src;
     lbImg.alt = img.alt;
-    lbCounter.textContent = `${idx + 1} / ${photos.length}`;
+    const vis = visiblePhotos();
+    const idx = vis.indexOf(el);
+    lbCounter.textContent = `${idx + 1} / ${vis.length}`;
     lightbox.classList.add('open');
     document.body.style.overflow = 'hidden';
+    lbClose.focus();
   }
 
   function closeLightbox() {
     lightbox.classList.remove('open');
     document.body.style.overflow = '';
     lbImg.src = '';
+    if (currentEl) currentEl.focus();
+    currentEl = null;
   }
 
   function navigate(dir) {
-    current = (current + dir + photos.length) % photos.length;
-    openLightbox(current);
+    const vis = visiblePhotos();
+    const idx = vis.indexOf(currentEl);
+    const next = (idx + dir + vis.length) % vis.length;
+    openLightbox(vis[next]);
   }
 
-  photos.forEach((item, i) => {
-    item.addEventListener('click', () => openLightbox(i));
+  allPhotos.forEach(item => {
+    item.setAttribute('tabindex', '0');
+    item.setAttribute('role', 'button');
+    item.addEventListener('click', () => openLightbox(item));
+    item.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(item); }
+    });
   });
 
   lbClose.addEventListener('click', closeLightbox);
   lbPrev.addEventListener('click',  () => navigate(-1));
   lbNext.addEventListener('click',  () => navigate(1));
-
-  lightbox.addEventListener('click', e => {
-    if (e.target === lightbox) closeLightbox();
-  });
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
 
   document.addEventListener('keydown', e => {
     if (!lightbox.classList.contains('open')) return;
@@ -114,7 +170,7 @@
 
 /* --- Video Modal --- */
 (function () {
-  const modal     = document.getElementById('videoModal');
+  const modal      = document.getElementById('videoModal');
   if (!modal) return;
 
   const modalVideo = modal.querySelector('video');
@@ -127,6 +183,7 @@
     modalVideo.play().catch(() => {});
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
+    modalClose.focus();
   }
 
   function closeModal() {
@@ -137,7 +194,12 @@
   }
 
   thumbs.forEach(thumb => {
+    thumb.setAttribute('tabindex', '0');
+    thumb.setAttribute('role', 'button');
     thumb.addEventListener('click', () => openModal(thumb.dataset.src));
+    thumb.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(thumb.dataset.src); }
+    });
   });
 
   modalClose.addEventListener('click', closeModal);
@@ -147,7 +209,7 @@
   });
 })();
 
-/* --- Specs sidebar active state on scroll --- */
+/* --- Specs Sidebar Scrollspy --- */
 (function () {
   const sections = document.querySelectorAll('.spec-section[id]');
   const navLinks = document.querySelectorAll('.specs-nav a');
@@ -174,15 +236,32 @@
   form.addEventListener('submit', e => {
     e.preventDefault();
     const name = form.querySelector('[name="name"]').value.trim();
-    const btn = form.querySelector('[type="submit"]');
+    const btn  = form.querySelector('[type="submit"]');
     btn.textContent = 'Message Sent';
-    btn.disabled = true;
+    btn.disabled    = true;
     btn.style.opacity = '0.7';
 
-    // Show confirmation
     const msg = document.createElement('p');
     msg.style.cssText = 'margin-top:1.2rem;font-size:.82rem;color:var(--lime);letter-spacing:.1em;';
     msg.textContent = `Thank you${name ? ', ' + name : ''}. We'll be in touch shortly.`;
     form.appendChild(msg);
+  });
+})();
+
+/* --- Back to Top --- */
+(function () {
+  const btn = document.createElement('button');
+  btn.className   = 'back-to-top';
+  btn.innerHTML   = '&#8593;';
+  btn.setAttribute('aria-label', 'Back to top');
+  btn.setAttribute('title', 'Back to top');
+  document.body.appendChild(btn);
+
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 600);
+  });
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 })();

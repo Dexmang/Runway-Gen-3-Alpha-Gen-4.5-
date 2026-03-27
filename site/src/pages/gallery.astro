@@ -3,26 +3,41 @@ import Layout from '../layouts/Layout.astro';
 const b = import.meta.env.BASE_URL;
 
 const photos = [
-  'IMG_8136','IMG_8137','IMG_8138','IMG_8139','IMG_8140','IMG_8141','IMG_8142',
-  'IMG_8160','IMG_8161','IMG_8167','IMG_8168','IMG_8172','IMG_8173','IMG_8174',
-  'IMG_8175','IMG_8190','IMG_8191','IMG_8192','IMG_8193','IMG_8194','IMG_8195',
-  'IMG_8196','IMG_8197','IMG_8198','IMG_8199','IMG_8211',
+  { name: 'IMG_8136', cat: 'day',    alt: 'Aston Martin Vantage — full car, Bahai Temple' },
+  { name: 'IMG_8137', cat: 'day',    alt: 'Aston Martin badge and grille detail' },
+  { name: 'IMG_8138', cat: 'day',    alt: 'LED headlight detail' },
+  { name: 'IMG_8139', cat: 'day',    alt: 'Headlight, alternate angle' },
+  { name: 'IMG_8140', cat: 'day',    alt: '21-inch forged wheel and yellow brake caliper' },
+  { name: 'IMG_8141', cat: 'day',    alt: 'Michelin tire and wheel detail' },
+  { name: 'IMG_8142', cat: 'day',    alt: 'Front three-quarter, Bahai Temple backdrop' },
+  { name: 'IMG_8160', cat: 'day',    alt: 'Rear view with doors open' },
+  { name: 'IMG_8161', cat: 'day',    alt: 'Rear view, alternate angle' },
+  { name: 'IMG_8167', cat: 'engine', alt: '4.0L twin-turbo V8 engine bay' },
+  { name: 'IMG_8168', cat: 'engine', alt: 'Engine bay detail' },
+  { name: 'IMG_8172', cat: 'day',    alt: 'Driver-side profile, modern building' },
+  { name: 'IMG_8173', cat: 'day',    alt: 'Driver-side profile, alternate angle' },
+  { name: 'IMG_8174', cat: 'day',    alt: 'Front three-quarter at dusk' },
+  { name: 'IMG_8175', cat: 'day',    alt: 'Passenger-side profile' },
+  { name: 'IMG_8190', cat: 'night',  alt: 'Low-angle front three-quarter, dusk' },
+  { name: 'IMG_8191', cat: 'night',  alt: 'Front grille and hood, dusk' },
+  { name: 'IMG_8192', cat: 'night',  alt: 'Front headlight detail, dusk' },
+  { name: 'IMG_8193', cat: 'night',  alt: 'Passenger-side profile, lights on' },
+  { name: 'IMG_8194', cat: 'night',  alt: 'Rear three-quarter, tail lights on' },
+  { name: 'IMG_8195', cat: 'night',  alt: 'Low front shot, headlights on' },
+  { name: 'IMG_8196', cat: 'night',  alt: 'Head-on, headlights on' },
+  { name: 'IMG_8197', cat: 'night',  alt: 'Front, slight angle, headlights on' },
+  { name: 'IMG_8198', cat: 'night',  alt: 'Dramatic headlight flare, night' },
+  { name: 'IMG_8199', cat: 'night',  alt: 'Front, headlights on, night' },
 ];
 
-const outsideVideos = [
-  { src: `${b}videos/outside/IMG_8121.mp4`, label: 'Exterior · Clip 1' },
-  { src: `${b}videos/outside/IMG_8122.mp4`, label: 'Exterior · Clip 2' },
-  { src: `${b}videos/outside/IMG_8131.mp4`, label: 'Exterior · Clip 3' },
-];
-
-const insideVideos = [
-  { src: `${b}videos/inside/IMG_7063.mp4`, label: 'Interior · Clip 1', poster: `${b}photos/IMG_8190.JPG` },
-  { src: `${b}videos/inside/IMG_7064.mp4`, label: 'Interior · Clip 2', poster: `${b}photos/IMG_8191.JPG` },
-  { src: `${b}videos/inside/IMG_7065.mp4`, label: 'Interior · Clip 3', poster: `${b}photos/IMG_8192.JPG` },
+const videos = [
+  { src: `${b}videos/outside/IMG_8121.mp4`, thumb: `${b}videos/outside/thumb_8121.jpg`, label: 'Walkaround · Clip 1' },
+  { src: `${b}videos/outside/IMG_8122.mp4`, thumb: `${b}videos/outside/thumb_8122.jpg`, label: 'Side Sweep · Clip 2' },
+  { src: `${b}videos/outside/IMG_8131.mp4`, thumb: `${b}videos/outside/thumb_8131.jpg`, label: 'Rear Profile · Clip 3' },
 ];
 ---
 
-<Layout title="Gallery — 2026 Aston Martin Vantage" description="Photo and video gallery of the 2026 Aston Martin Vantage Coupe for private sale.">
+<Layout title="Gallery — 2026 Aston Martin Vantage" description="25 exterior photos and video clips. Jet Black, 656hp, $199,500. Private sale Chicagoland IL.">
 
   <nav class="nav scrolled" role="navigation" aria-label="Main navigation">
     <a href={b} class="nav-logo">V<span>antage</span></a>
@@ -50,31 +65,13 @@ const insideVideos = [
     <div class="container">
       <div class="section-header fade-in">
         <p class="label">Film</p>
-        <h2>In Motion</h2>
+        <h2>Exterior Clips</h2>
       </div>
-
-      <p class="label" style="margin-bottom:1.2rem;">Exterior</p>
-      <div class="video-grid" style="margin-bottom:3rem;">
-        {outsideVideos.map((v, i) => (
-          <div class={`video-thumb fade-in${i > 0 ? ` fade-in-delay-${i}` : ''}`} data-src={v.src}>
-            <img src={`${b}hero_poster.jpg`} alt={v.label} loading="lazy" />
-            <div class="video-play-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <circle cx="12" cy="12" r="11" fill="rgba(0,0,0,0.5)" stroke="rgba(255,255,255,0.4)" stroke-width="0.5"/>
-                <path d="M9.5 7.5l7 4.5-7 4.5V7.5z"/>
-              </svg>
-            </div>
-            <span class="video-label">{v.label}</span>
-          </div>
-        ))}
-      </div>
-
-      <p class="label" style="margin-bottom:1.2rem;">Interior</p>
-      <div class="video-grid">
-        {insideVideos.map((v, i) => (
-          <div class={`video-thumb fade-in${i > 0 ? ` fade-in-delay-${i}` : ''}`} data-src={v.src}>
-            <img src={v.poster} alt={v.label} loading="lazy" />
-            <div class="video-play-btn">
+      <div class="video-grid video-grid-3 fade-in">
+        {videos.map((v) => (
+          <div class="video-thumb" data-src={v.src} tabindex="0" role="button">
+            <img src={v.thumb} alt={v.label} loading="lazy" />
+            <div class="video-play-btn" aria-hidden="true">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                 <circle cx="12" cy="12" r="11" fill="rgba(0,0,0,0.5)" stroke="rgba(255,255,255,0.4)" stroke-width="0.5"/>
                 <path d="M9.5 7.5l7 4.5-7 4.5V7.5z"/>
@@ -91,20 +88,30 @@ const insideVideos = [
     <div class="container">
       <div class="section-header fade-in">
         <p class="label">Photography</p>
-        <h2>All 26 Photos</h2>
+        <h2>25 Photos</h2>
       </div>
-      <div class="photo-grid">
-        {photos.map((name, i) => (
-          <div class="photo-item fade-in">
+
+      <div class="gallery-filters fade-in" role="tablist" aria-label="Filter photos by category">
+        <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All <span class="filter-count"></span></button>
+        <button class="filter-btn" data-filter="day" role="tab" aria-selected="false">Day <span class="filter-count"></span></button>
+        <button class="filter-btn" data-filter="night" role="tab" aria-selected="false">Night <span class="filter-count"></span></button>
+        <button class="filter-btn" data-filter="engine" role="tab" aria-selected="false">Engine <span class="filter-count"></span></button>
+      </div>
+
+      <div class="photo-grid" id="photoGrid">
+        {photos.map((p) => (
+          <div class="photo-item fade-in" data-category={p.cat} tabindex="0" role="button">
             <img
-              src={`${b}thumbs/${name}.JPG`}
-              data-full={`${b}photos/${name}.JPG`}
-              alt={`Vantage photo ${i + 1}`}
+              src={`${b}thumbs/${p.name}.JPG`}
+              data-full={`${b}photos/${p.name}.JPG`}
+              alt={p.alt}
               loading="lazy"
             />
           </div>
         ))}
       </div>
+
+      <p class="gallery-empty" style="display:none;text-align:center;color:var(--text-dim);padding:3rem 0;font-size:.82rem;letter-spacing:.15em;text-transform:uppercase;">No photos in this category</p>
     </div>
   </section>
 
@@ -124,6 +131,7 @@ const insideVideos = [
     <button class="lightbox-prev" aria-label="Previous photo">&#8592;</button>
     <button class="lightbox-next" aria-label="Next photo">&#8594;</button>
     <div class="lightbox-counter" aria-live="polite"></div>
+    <div class="lightbox-hint" aria-hidden="true">&#8592; &#8594; navigate &nbsp;&nbsp; Esc close</div>
   </div>
 
   <div id="videoModal" class="video-modal" role="dialog" aria-modal="true" aria-label="Video player">
@@ -132,5 +140,41 @@ const insideVideos = [
       <video controls playsinline></video>
     </div>
   </div>
+
+  <audio id="classicalAudio" loop preload="none">
+    <source src={`${b}audio/classical.mp3`} type="audio/mpeg" />
+  </audio>
+
+  <button id="musicToggle" aria-label="Toggle classical music" title="Toggle classical music"
+    style="position:fixed;bottom:2rem;right:2rem;z-index:9999;width:3rem;height:3rem;border-radius:50%;border:1px solid rgba(255,255,255,0.25);background:rgba(10,10,10,0.85);backdrop-filter:blur(8px);cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.2rem;transition:border-color .2s,background .2s;"
+    onmouseover="this.style.borderColor='#b5cc4a';this.style.background='rgba(20,20,20,0.95)'"
+    onmouseout="this.style.borderColor='rgba(255,255,255,0.25)';this.style.background='rgba(10,10,10,0.85)'">
+    &#9835;
+  </button>
+
+  <script>
+  (function () {
+    const audio = document.getElementById('classicalAudio') as HTMLAudioElement;
+    const btn   = document.getElementById('musicToggle') as HTMLButtonElement;
+    const modal = document.getElementById('videoModal');
+    let playing = false;
+
+    function startMusic() {
+      audio.play().then(() => { playing = true; btn.style.color = '#b5cc4a'; }).catch(() => {});
+    }
+    function stopMusic() {
+      audio.pause(); playing = false; btn.style.color = '#fff';
+    }
+
+    btn.addEventListener('click', () => playing ? stopMusic() : startMusic());
+
+    if (modal) {
+      new MutationObserver(() => {
+        if (modal.classList.contains('open')) { if (!playing) startMusic(); }
+        else { stopMusic(); }
+      }).observe(modal, { attributes: true, attributeFilter: ['class'] });
+    }
+  })();
+  </script>
 
 </Layout>
