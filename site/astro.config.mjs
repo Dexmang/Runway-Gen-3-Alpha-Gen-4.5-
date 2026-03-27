@@ -5,8 +5,8 @@ import { defineConfig } from 'astro/config';
 //   User/org page (username.github.io): set site, leave base as '/'
 //   Project page (username.github.io/repo-name): set site AND base
 export default defineConfig({
-  site: 'https://YOUR-USERNAME.github.io',
-  base: '/',
+  site: 'https://Dexmang.github.io',
+  base: '/Runway-Gen-3-Alpha-Gen-4.5-',
   publicDir: '../web_assets',
   output: 'static',
 });
