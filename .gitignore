@@ -1,0 +1,13 @@
+# Raw source files — large, not needed for deployment
+Videos_outside/
+pictures/
+videos_inside/
+Marketing-Package.docx
+
+# Old static site (superseded by Astro)
+website/
+
+# Astro / Node
+site/node_modules/
+site/dist/
+site/.astro/

@@ -1,0 +1,151 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const photos = [
+  'IMG_8136','IMG_8137','IMG_8138','IMG_8139','IMG_8140','IMG_8141','IMG_8142',
+  'IMG_8160','IMG_8161','IMG_8167','IMG_8168','IMG_8172','IMG_8173','IMG_8174',
+  'IMG_8175','IMG_8190','IMG_8191','IMG_8192','IMG_8193','IMG_8194','IMG_8195',
+  'IMG_8196','IMG_8197','IMG_8198','IMG_8199','IMG_8211',
+];
+
+const outsideVideos = [
+  { src: '/videos/outside/IMG_8121.mp4', label: 'Exterior · Clip 1' },
+  { src: '/videos/outside/IMG_8122.mp4', label: 'Exterior · Clip 2' },
+  { src: '/videos/outside/IMG_8131.mp4', label: 'Exterior · Clip 3' },
+];
+
+const insideVideos = [
+  { src: '/videos/inside/IMG_7063.mp4', label: 'Interior · Clip 1', poster: '/photos/IMG_8190.JPG' },
+  { src: '/videos/inside/IMG_7064.mp4', label: 'Interior · Clip 2', poster: '/photos/IMG_8191.JPG' },
+  { src: '/videos/inside/IMG_7065.mp4', label: 'Interior · Clip 3', poster: '/photos/IMG_8192.JPG' },
+];
+---
+
+<Layout
+  title="Gallery — 2026 Aston Martin Vantage"
+  description="Photo and video gallery of the 2026 Aston Martin Vantage Coupe for private sale."
+>
+
+  <!-- Navigation -->
+  <nav class="nav scrolled" role="navigation" aria-label="Main navigation">
+    <a href="/" class="nav-logo">V<span>antage</span></a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/gallery">Gallery</a></li>
+      <li><a href="/specs">Specifications</a></li>
+      <li><a href="/contact" class="nav-cta">Inquire</a></li>
+    </ul>
+  </nav>
+
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <img src="/photos/IMG_8138.JPG" alt="2026 Aston Martin Vantage" loading="eager" />
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <p class="label">Visual Overview</p>
+      <h1>Gallery</h1>
+    </div>
+  </div>
+
+  <!-- Video Section -->
+  <section class="video-section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <p class="label">Film</p>
+        <h2>In Motion</h2>
+      </div>
+
+      <p class="label" style="margin-bottom:1.2rem;">Exterior</p>
+      <div class="video-grid" style="margin-bottom:3rem;">
+        {outsideVideos.map((v, i) => (
+          <div class={`video-thumb fade-in${i > 0 ? ` fade-in-delay-${i}` : ''}`}
+               data-src={v.src}>
+            <img src="/hero_poster.jpg" alt={v.label} loading="lazy" />
+            <div class="video-play-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <circle cx="12" cy="12" r="11" fill="rgba(0,0,0,0.5)" stroke="rgba(255,255,255,0.4)" stroke-width="0.5"/>
+                <path d="M9.5 7.5l7 4.5-7 4.5V7.5z"/>
+              </svg>
+            </div>
+            <span class="video-label">{v.label}</span>
+          </div>
+        ))}
+      </div>
+
+      <p class="label" style="margin-bottom:1.2rem;">Interior</p>
+      <div class="video-grid">
+        {insideVideos.map((v, i) => (
+          <div class={`video-thumb fade-in${i > 0 ? ` fade-in-delay-${i}` : ''}`}
+               data-src={v.src}>
+            <img src={v.poster} alt={v.label} loading="lazy" />
+            <div class="video-play-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <circle cx="12" cy="12" r="11" fill="rgba(0,0,0,0.5)" stroke="rgba(255,255,255,0.4)" stroke-width="0.5"/>
+                <path d="M9.5 7.5l7 4.5-7 4.5V7.5z"/>
+              </svg>
+            </div>
+            <span class="video-label">{v.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo Gallery -->
+  <section class="photo-section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <p class="label">Photography</p>
+        <h2>All 26 Photos</h2>
+      </div>
+
+      <div class="photo-grid">
+        {photos.map((name, i) => (
+          <div class="photo-item fade-in">
+            <img
+              src={`/thumbs/${name}.JPG`}
+              data-full={`/photos/${name}.JPG`}
+              alt={`Vantage photo ${i + 1}`}
+              loading="lazy"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p class="footer-logo">Vantage</p>
+      <p>2026 Aston Martin Vantage Coupe &mdash; VIN: SCFSMGFW8TGN10773</p>
+      <p style="margin-top:0.5rem;">
+        Chicagoland, IL &nbsp;&middot;&nbsp;
+        <a href="/contact" style="color:var(--lime);">Contact for Inquiries</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox">
+    <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
+    <div class="lightbox-inner">
+      <img class="lightbox-img" src="" alt="" />
+    </div>
+    <button class="lightbox-prev" aria-label="Previous photo">&#8592;</button>
+    <button class="lightbox-next" aria-label="Next photo">&#8594;</button>
+    <div class="lightbox-counter" aria-live="polite"></div>
+  </div>
+
+  <!-- Video Modal -->
+  <div id="videoModal" class="video-modal" role="dialog" aria-modal="true" aria-label="Video player">
+    <button class="video-modal-close" aria-label="Close video">&times;</button>
+    <div class="video-modal-inner">
+      <video controls playsinline></video>
+    </div>
+  </div>
+
+</Layout>
