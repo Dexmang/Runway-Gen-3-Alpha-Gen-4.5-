@@ -393,10 +393,18 @@ const filmClips = [
       }
     }
 
-    // Start music immediately on page load
-    startMusic();
+    // Browsers block autoplay audio on live sites — start on first user interaction
+    function initMusic() {
+      startMusic();
+      document.removeEventListener('click', initMusic);
+      document.removeEventListener('scroll', initMusic);
+      document.removeEventListener('touchstart', initMusic);
+    }
+    document.addEventListener('click', initMusic, { once: false });
+    document.addEventListener('scroll', initMusic, { once: false });
+    document.addEventListener('touchstart', initMusic, { once: false });
 
-    btn.addEventListener('click', (e) => { e.stopPropagation(); toggleMute(); });
+    btn.addEventListener('click', (e) => { e.stopPropagation(); if (started) toggleMute(); else initMusic(); });
   })();
   </script>
 
