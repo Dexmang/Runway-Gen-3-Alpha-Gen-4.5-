@@ -393,18 +393,16 @@ const filmClips = [
       }
     }
 
-    // Browsers block autoplay audio on live sites — start on first user interaction
-    function initMusic() {
+    // Autoplay on page load — retry until browser allows it
+    startMusic();
+    let retryCount = 0;
+    const retryTimer = setInterval(() => {
+      if (started || retryCount > 50) { clearInterval(retryTimer); return; }
+      retryCount++;
       startMusic();
-      document.removeEventListener('click', initMusic);
-      document.removeEventListener('scroll', initMusic);
-      document.removeEventListener('touchstart', initMusic);
-    }
-    document.addEventListener('click', initMusic, { once: false });
-    document.addEventListener('scroll', initMusic, { once: false });
-    document.addEventListener('touchstart', initMusic, { once: false });
+    }, 200);
 
-    btn.addEventListener('click', (e) => { e.stopPropagation(); if (started) toggleMute(); else initMusic(); });
+    btn.addEventListener('click', (e) => { e.stopPropagation(); toggleMute(); });
   })();
   </script>
 
