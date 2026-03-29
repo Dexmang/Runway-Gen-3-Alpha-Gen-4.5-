@@ -2,14 +2,15 @@
 import Layout from '../layouts/Layout.astro';
 const b = import.meta.env.BASE_URL;
 
+/* ─── PHOTOS (26) ─── */
 const photos = [
-  { name: 'IMG_8136', cat: 'day',    alt: 'Aston Martin Vantage — full car, Bahai Temple' },
-  { name: 'IMG_8137', cat: 'day',    alt: 'Aston Martin badge and grille detail' },
+  { name: 'IMG_8136', cat: 'day',    alt: 'Full car, Bahai Temple' },
+  { name: 'IMG_8137', cat: 'day',    alt: 'Badge and grille detail' },
   { name: 'IMG_8138', cat: 'day',    alt: 'LED headlight detail' },
   { name: 'IMG_8139', cat: 'day',    alt: 'Headlight, alternate angle' },
   { name: 'IMG_8140', cat: 'day',    alt: '21-inch forged wheel and yellow brake caliper' },
   { name: 'IMG_8141', cat: 'day',    alt: 'Michelin tire and wheel detail' },
-  { name: 'IMG_8142', cat: 'day',    alt: 'Front three-quarter, Bahai Temple backdrop' },
+  { name: 'IMG_8142', cat: 'day',    alt: 'Front three-quarter, Bahai Temple' },
   { name: 'IMG_8160', cat: 'day',    alt: 'Rear view with doors open' },
   { name: 'IMG_8161', cat: 'day',    alt: 'Rear view, alternate angle' },
   { name: 'IMG_8167', cat: 'engine', alt: '4.0L twin-turbo V8 engine bay' },
@@ -28,16 +29,99 @@ const photos = [
   { name: 'IMG_8197', cat: 'night',  alt: 'Front, slight angle, headlights on' },
   { name: 'IMG_8198', cat: 'night',  alt: 'Dramatic headlight flare, night' },
   { name: 'IMG_8199', cat: 'night',  alt: 'Front, headlights on, night' },
+  { name: 'IMG_8211', cat: 'day',    alt: 'Front three-quarter, modern building' },
 ];
 
-const videos = [
-  { src: `${b}videos/outside/IMG_8121.mp4`, thumb: `${b}videos/outside/thumb_8121.jpg`, label: 'Walkaround · Clip 1' },
-  { src: `${b}videos/outside/IMG_8122.mp4`, thumb: `${b}videos/outside/thumb_8122.jpg`, label: 'Side Sweep · Clip 2' },
-  { src: `${b}videos/outside/IMG_8131.mp4`, thumb: `${b}videos/outside/thumb_8131.jpg`, label: 'Rear Profile · Clip 3' },
+/* ─── EXTERIOR FILMS ─── */
+const exteriorVids = [
+  /* Modern building / dusk / night */
+  { src: `${b}videos/outside/IMG_8177.mp4`, thumb: `${b}videos/outside/thumb_8177.jpg`, label: 'The Reveal' },
+  { src: `${b}videos/outside/IMG_8181.mp4`, thumb: `${b}videos/outside/thumb_8181.jpg`, label: 'Ground Level' },
+  { src: `${b}videos/outside/IMG_8182.mp4`, thumb: `${b}videos/outside/thumb_8182.jpg`, label: 'Taillights' },
+  { src: `${b}videos/outside/IMG_8183.mp4`, thumb: `${b}videos/outside/thumb_8183.jpg`, label: 'Rear Quarter' },
+  { src: `${b}videos/outside/IMG_8184.mp4`, thumb: `${b}videos/outside/thumb_8184.jpg`, label: 'Roofline' },
+  { src: `${b}videos/outside/IMG_8186.mp4`, thumb: `${b}videos/outside/thumb_8186.jpg`, label: 'Silhouette' },
+  { src: `${b}videos/outside/IMG_8187.mp4`, thumb: `${b}videos/outside/thumb_8187.jpg`, label: 'Light Signature' },
+  { src: `${b}videos/outside/IMG_8188.mp4`, thumb: `${b}videos/outside/thumb_8188.jpg`, label: 'Badge Detail' },
+  { src: `${b}videos/outside/IMG_8189.mp4`, thumb: `${b}videos/outside/thumb_8189.jpg`, label: 'Front Approach' },
+  { src: `${b}videos/outside/IMG_8200.mp4`, thumb: `${b}videos/outside/thumb_8200.jpg`, label: 'Dusk Profile' },
+  { src: `${b}videos/outside/IMG_8201.mp4`, thumb: `${b}videos/outside/thumb_8201.jpg`, label: 'Night Lines' },
+  { src: `${b}videos/outside/IMG_8202.mp4`, thumb: `${b}videos/outside/thumb_8202.jpg`, label: 'After Dark' },
+  { src: `${b}videos/outside/IMG_8203.mp4`, thumb: `${b}videos/outside/thumb_8203.jpg`, label: 'Nightfall' },
+  { src: `${b}videos/outside/IMG_8185.mp4`, thumb: `${b}videos/outside/thumb_8185.jpg`, label: 'Garage Sweep' },
+  { src: `${b}videos/outside/IMG_8207.mp4`, thumb: `${b}videos/outside/thumb_8207.jpg`, label: '007' },
+  { src: `${b}videos/outside/IMG_8207_007.mp4`, thumb: `${b}videos/outside/thumb_8207_007.jpg`, label: '007 Approach' },
+  { src: `${b}videos/outside/IMG__007.mp4`, thumb: `${b}videos/outside/thumb__007.jpg`, label: '007 Floor' },
+  /* Bahai Temple / golden hour */
+  { src: `${b}videos/outside/IMG_8121.mp4`, thumb: `${b}videos/outside/thumb_8121.jpg`, label: 'Walkaround' },
+  { src: `${b}videos/outside/IMG_8122.mp4`, thumb: `${b}videos/outside/thumb_8122.jpg`, label: 'Side Sweep' },
+  { src: `${b}videos/outside/IMG_8131.mp4`, thumb: `${b}videos/outside/thumb_8131.jpg`, label: 'Rear Profile' },
+  { src: `${b}videos/outside/IMG_8132.mp4`, thumb: `${b}videos/outside/thumb_8132.jpg`, label: 'Full Profile' },
+  { src: `${b}videos/outside/IMG_8133.mp4`, thumb: `${b}videos/outside/thumb_8133.jpg`, label: 'Quarter Pan' },
+  { src: `${b}videos/outside/IMG_8134.mp4`, thumb: `${b}videos/outside/thumb_8134.jpg`, label: 'Side Vent' },
+  { src: `${b}videos/outside/IMG_8135.mp4`, thumb: `${b}videos/outside/thumb_8135.jpg`, label: 'Head On' },
+  { src: `${b}videos/outside/IMG_8143.mp4`, thumb: `${b}videos/outside/thumb_8143.jpg`, label: 'Front Grille' },
+  { src: `${b}videos/outside/IMG_8144.mp4`, thumb: `${b}videos/outside/thumb_8144.jpg`, label: 'Golden Hour' },
+  { src: `${b}videos/outside/IMG_8145.mp4`, thumb: `${b}videos/outside/thumb_8145.jpg`, label: 'Low Angle' },
+  { src: `${b}videos/outside/IMG_8146.mp4`, thumb: `${b}videos/outside/thumb_8146.jpg`, label: 'Badge Close-Up' },
+  { src: `${b}videos/outside/IMG_8148.mp4`, thumb: `${b}videos/outside/thumb_8148.jpg`, label: 'Approach' },
+  { src: `${b}videos/outside/IMG_8152.mp4`, thumb: `${b}videos/outside/thumb_8152.jpg`, label: 'Wheel Detail' },
+  { src: `${b}videos/outside/IMG_8155.mp4`, thumb: `${b}videos/outside/thumb_8155.jpg`, label: 'Sweep' },
+  { src: `${b}videos/outside/IMG_8157.mp4`, thumb: `${b}videos/outside/thumb_8157.jpg`, label: 'Tracking Shot' },
+  { src: `${b}videos/outside/IMG_8158.mp4`, thumb: `${b}videos/outside/thumb_8158.jpg`, label: 'Orbit' },
+  { src: `${b}videos/outside/IMG_8159.mp4`, thumb: `${b}videos/outside/thumb_8159.jpg`, label: 'Front Detail' },
+  { src: `${b}videos/outside/IMG_8164.mp4`, thumb: `${b}videos/outside/thumb_8164.jpg`, label: 'Rear Badge' },
+  { src: `${b}videos/outside/IMG_8165.mp4`, thumb: `${b}videos/outside/thumb_8165.jpg`, label: 'Windshield' },
+  { src: `${b}videos/outside/IMG_8166.mp4`, thumb: `${b}videos/outside/thumb_8166.jpg`, label: 'Door Handle' },
+  { src: `${b}videos/outside/IMG_8171.mp4`, thumb: `${b}videos/outside/thumb_8171.jpg`, label: 'Detail Pan' },
+  { src: `${b}videos/outside/IMG_8178.mp4`, thumb: `${b}videos/outside/thumb_8178.jpg`, label: 'Reveal' },
 ];
+
+/* ─── UNDER THE HOOD ─── */
+const engineVids = [
+  { src: `${b}videos/outside/IMG_8169.mp4`, thumb: `${b}videos/outside/thumb_8169.jpg`, label: 'Engine Bay' },
+  { src: `${b}videos/outside/IMG_8170.mp4`, thumb: `${b}videos/outside/thumb_8170.jpg`, label: 'Twin Turbo V8' },
+];
+
+/* ─── THE COCKPIT — Interior of the car ─── */
+const cockpitVids = [
+  { src: `${b}videos/inside/IMG_7063.mp4`, thumb: `${b}videos/inside/thumb_7063.jpg`, label: 'Cockpit Overview' },
+  { src: `${b}videos/inside/IMG_7064.mp4`, thumb: `${b}videos/inside/thumb_7064.jpg`, label: 'Center Console' },
+  { src: `${b}videos/inside/IMG_7065.mp4`, thumb: `${b}videos/inside/thumb_7065.jpg`, label: 'Driver Controls' },
+  { src: `${b}videos/inside/IMG_7066.mp4`, thumb: `${b}videos/inside/thumb_7066.jpg`, label: 'Stitching Detail' },
+  { src: `${b}videos/inside/IMG_7067.mp4`, thumb: `${b}videos/inside/thumb_7067.jpg`, label: 'Instrument Cluster' },
+  { src: `${b}videos/inside/IMG_7072.mp4`, thumb: `${b}videos/inside/thumb_7072.jpg`, label: 'Ambient Lighting' },
+  { src: `${b}videos/inside/IMG_7074.mp4`, thumb: `${b}videos/inside/thumb_7074.jpg`, label: 'Door Panel' },
+  { src: `${b}videos/inside/IMG_7086.mp4`, thumb: `${b}videos/inside/thumb_7086.jpg`, label: 'Rear Detail' },
+  { src: `${b}videos/inside/IMG_7087.mp4`, thumb: `${b}videos/inside/thumb_7087.jpg`, label: 'Center Stack' },
+  { src: `${b}videos/inside/IMG_7088.mp4`, thumb: `${b}videos/inside/thumb_7088.jpg`, label: 'Steering Wheel' },
+  { src: `${b}videos/inside/IMG_7089.mp4`, thumb: `${b}videos/inside/thumb_7089.jpg`, label: 'Wheel Controls' },
+  { src: `${b}videos/inside/IMG_7091.mp4`, thumb: `${b}videos/inside/thumb_7091.jpg`, label: 'AMR Lime Stitching' },
+  /* Interior clips filed under Videos_outside */
+  { src: `${b}videos/outside/IMG_8149.mp4`, thumb: `${b}videos/outside/thumb_8149.jpg`, label: 'Steering Badge' },
+  { src: `${b}videos/outside/IMG_8150.mp4`, thumb: `${b}videos/outside/thumb_8150.jpg`, label: 'Door Trim' },
+  { src: `${b}videos/outside/IMG_8153.mp4`, thumb: `${b}videos/outside/thumb_8153.jpg`, label: 'Digital Gauges' },
+  { src: `${b}videos/outside/IMG_8163.mp4`, thumb: `${b}videos/outside/thumb_8163.jpg`, label: 'Air Vent' },
+];
+
+/* ─── THE INSPECTION — Dealership showroom walkthrough ─── */
+const inspectionVids = [
+  { src: `${b}videos/inside/IMG_7076.mp4`, thumb: `${b}videos/inside/thumb_7076.jpg`, label: 'Showroom Front' },
+  { src: `${b}videos/inside/IMG_7069.mp4`, thumb: `${b}videos/inside/thumb_7069.jpg`, label: 'Rear Showroom' },
+  { src: `${b}videos/inside/IMG_7071.mp4`, thumb: `${b}videos/inside/thumb_7071.jpg`, label: 'Quarter View' },
+  { src: `${b}videos/inside/IMG_7073.mp4`, thumb: `${b}videos/inside/thumb_7073.jpg`, label: 'Wheel Inspection' },
+  { src: `${b}videos/inside/IMG_7075.mp4`, thumb: `${b}videos/inside/thumb_7075.jpg`, label: 'Rear Wheel' },
+  { src: `${b}videos/inside/IMG_7092.mp4`, thumb: `${b}videos/inside/thumb_7092.jpg`, label: 'Grille Detail' },
+  { src: `${b}videos/inside/IMG_7093.mp4`, thumb: `${b}videos/inside/thumb_7093.jpg`, label: 'Hood Open' },
+  { src: `${b}videos/inside/IMG_7094.mp4`, thumb: `${b}videos/inside/thumb_7094.jpg`, label: 'Side Mirror' },
+  { src: `${b}videos/inside/IMG_7095.mp4`, thumb: `${b}videos/inside/thumb_7095.jpg`, label: 'Mirror Detail' },
+];
+
+/* helper to render a video thumb */
+const playIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,0.5)" stroke="rgba(255,255,255,0.4)" stroke-width="0.5"/><path d="M9.5 7.5l7 4.5-7 4.5V7.5z"/></svg>`;
 ---
 
-<Layout title="Gallery — 2026 Aston Martin Vantage" description="25 exterior photos and video clips. Jet Black, 656hp, $199,500. Private sale Chicagoland IL.">
+<Layout title="Gallery — 2026 Aston Martin Vantage" description="26 photos, 60+ video clips — exterior, interior, engine, and showroom inspection. Jet Black, 656hp, $199,007. Private sale Chicagoland IL.">
 
   <nav class="nav scrolled" role="navigation" aria-label="Main navigation">
     <a href={b} class="nav-logo">V<span>antage</span></a>
@@ -53,30 +137,28 @@ const videos = [
   </nav>
 
   <div class="page-hero">
-    <img src={`${b}photos/IMG_8138.JPG`} alt="2026 Aston Martin Vantage" loading="eager" />
+    <img src={`${b}photos/IMG_8190.JPG`} alt="2026 Aston Martin Vantage" loading="eager" />
     <div class="page-hero-overlay"></div>
     <div class="page-hero-content">
       <p class="label">Visual Overview</p>
       <h1>Gallery</h1>
+      <p class="gallery-hero-sub">26 photographs &middot; 60+ films</p>
     </div>
   </div>
 
-  <section class="video-section">
+  <!-- ═══ EXTERIOR FILMS ═══ -->
+  <section class="gallery-section">
     <div class="container">
       <div class="section-header fade-in">
         <p class="label">Film</p>
-        <h2>Exterior Clips</h2>
+        <h2>Exterior</h2>
+        <p class="gallery-section-sub">39 clips &mdash; golden hour, dusk, and night</p>
       </div>
-      <div class="video-grid video-grid-3 fade-in">
-        {videos.map((v) => (
+      <div class="video-grid gallery-video-grid fade-in">
+        {exteriorVids.map((v) => (
           <div class="video-thumb" data-src={v.src} tabindex="0" role="button">
             <img src={v.thumb} alt={v.label} loading="lazy" />
-            <div class="video-play-btn" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <circle cx="12" cy="12" r="11" fill="rgba(0,0,0,0.5)" stroke="rgba(255,255,255,0.4)" stroke-width="0.5"/>
-                <path d="M9.5 7.5l7 4.5-7 4.5V7.5z"/>
-              </svg>
-            </div>
+            <div class="video-play-btn" aria-hidden="true"><Fragment set:html={playIcon} /></div>
             <span class="video-label">{v.label}</span>
           </div>
         ))}
@@ -84,11 +166,72 @@ const videos = [
     </div>
   </section>
 
+  <!-- ═══ UNDER THE HOOD ═══ -->
+  <section class="gallery-section gallery-section--alt">
+    <div class="container">
+      <div class="section-header fade-in">
+        <p class="label">Film</p>
+        <h2>Under the Hood</h2>
+        <p class="gallery-section-sub">4.0L twin-turbo V8 &mdash; 656 horsepower</p>
+      </div>
+      <div class="video-grid gallery-video-grid gallery-video-grid--sm fade-in">
+        {engineVids.map((v) => (
+          <div class="video-thumb" data-src={v.src} tabindex="0" role="button">
+            <img src={v.thumb} alt={v.label} loading="lazy" />
+            <div class="video-play-btn" aria-hidden="true"><Fragment set:html={playIcon} /></div>
+            <span class="video-label">{v.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ THE COCKPIT ═══ -->
+  <section class="gallery-section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <p class="label">Film</p>
+        <h2>The Cockpit</h2>
+        <p class="gallery-section-sub">Haircalf leather, AMR Lime stitching, 10.25" display</p>
+      </div>
+      <div class="video-grid gallery-video-grid fade-in">
+        {cockpitVids.map((v) => (
+          <div class="video-thumb" data-src={v.src} tabindex="0" role="button">
+            <img src={v.thumb} alt={v.label} loading="lazy" />
+            <div class="video-play-btn" aria-hidden="true"><Fragment set:html={playIcon} /></div>
+            <span class="video-label">{v.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ THE INSPECTION ═══ -->
+  <section class="gallery-section gallery-section--alt">
+    <div class="container">
+      <div class="section-header fade-in">
+        <p class="label">Film</p>
+        <h2>The Inspection</h2>
+        <p class="gallery-section-sub">Condition walkaround &mdash; showroom lighting, zero excuses</p>
+      </div>
+      <div class="video-grid gallery-video-grid fade-in">
+        {inspectionVids.map((v) => (
+          <div class="video-thumb" data-src={v.src} tabindex="0" role="button">
+            <img src={v.thumb} alt={v.label} loading="lazy" />
+            <div class="video-play-btn" aria-hidden="true"><Fragment set:html={playIcon} /></div>
+            <span class="video-label">{v.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PHOTOGRAPHY ═══ -->
   <section class="photo-section">
     <div class="container">
       <div class="section-header fade-in">
         <p class="label">Photography</p>
-        <h2>25 Photos</h2>
+        <h2>26 Photos</h2>
       </div>
 
       <div class="gallery-filters fade-in" role="tablist" aria-label="Filter photos by category">

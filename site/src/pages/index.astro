@@ -1,9 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro';
 const b = import.meta.env.BASE_URL;
+
+const filmClips = [
+  { src: `${b}videos/outside/IMG_8177.mp4`, thumb: `${b}videos/outside/thumb_8177.jpg`, label: 'The Reveal' },
+  { src: `${b}videos/outside/IMG_8181.mp4`, thumb: `${b}videos/outside/thumb_8181.jpg`, label: 'Ground Level' },
+  { src: `${b}videos/outside/IMG_8182.mp4`, thumb: `${b}videos/outside/thumb_8182.jpg`, label: 'Taillights' },
+  { src: `${b}videos/outside/IMG_8184.mp4`, thumb: `${b}videos/outside/thumb_8184.jpg`, label: 'Roofline' },
+  { src: `${b}videos/outside/IMG_8187.mp4`, thumb: `${b}videos/outside/thumb_8187.jpg`, label: 'Light Signature' },
+  { src: `${b}videos/outside/IMG_8188.mp4`, thumb: `${b}videos/outside/thumb_8188.jpg`, label: 'Badge' },
+  { src: `${b}videos/outside/IMG_8203.mp4`, thumb: `${b}videos/outside/thumb_8203.jpg`, label: 'Nightfall' },
+  { src: `${b}videos/outside/IMG_8207.mp4`, thumb: `${b}videos/outside/thumb_8207.jpg`, label: '007' },
+];
 ---
 
-<Layout title="2026 Aston Martin Vantage — Private Sale" description="2026 Aston Martin Vantage Coupe. 656hp. 2,519 miles. Jet Black over Onyx Haircalf. $199,500. Full factory warranty. Private sale, Chicagoland.">
+<Layout title="2026 Aston Martin Vantage — Private Sale" description="2026 Aston Martin Vantage Coupe. 656hp. 2,519 miles. Jet Black over Onyx Haircalf. $199,007. Full factory warranty. Private sale, Chicagoland.">
 
   <nav class="nav" role="navigation" aria-label="Main navigation">
     <a href={b} class="nav-logo">V<span>antage</span></a>
@@ -18,79 +29,165 @@ const b = import.meta.env.BASE_URL;
     </ul>
   </nav>
 
+  <!-- ========== CINEMATIC HERO ========== -->
   <section class="hero" aria-label="Hero">
     <div class="hero-video-wrap">
-      <video autoplay muted loop playsinline poster={`${b}hero_poster.jpg`} aria-hidden="true">
-        <source src={`${b}videos/outside/IMG_8121.mp4`} type="video/mp4" />
+      <video class="hero-vid hero-vid--active" autoplay muted playsinline preload="auto" poster={`${b}hero_poster.jpg`} aria-hidden="true">
+        <source src={`${b}videos/outside/IMG_8189.mp4`} type="video/mp4" />
+      </video>
+      <video class="hero-vid" muted playsinline preload="none" aria-hidden="true">
+        <source src={`${b}videos/outside/IMG_8187.mp4`} type="video/mp4" />
+      </video>
+      <video class="hero-vid" muted playsinline preload="none" aria-hidden="true">
+        <source src={`${b}videos/outside/IMG_8147.mp4`} type="video/mp4" />
+      </video>
+      <video class="hero-vid" muted playsinline preload="none" aria-hidden="true">
+        <source src={`${b}videos/outside/IMG_8203.mp4`} type="video/mp4" />
       </video>
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <p class="label">Private Sale &mdash; Original Owner</p>
-      <h1 class="hero-title">2026 Aston Martin<br />Vantage Coupe</h1>
-      <p class="hero-sub">656 HP &nbsp;&middot;&nbsp; 2,519 Miles &nbsp;&middot;&nbsp; $199,500 &nbsp;&middot;&nbsp; Full Factory Warranty</p>
-      <div class="hero-actions">
+      <p class="label hero-anim hero-anim-1">Private Sale &mdash; Original Owner</p>
+      <h1 class="hero-title hero-anim hero-anim-2">2026 Aston Martin<br/>Vantage Coupe</h1>
+      <p class="hero-sub hero-anim hero-anim-3">656 HP &nbsp;&middot;&nbsp; 2,519 Miles &nbsp;&middot;&nbsp; $199,007 &nbsp;&middot;&nbsp; Full Factory Warranty</p>
+      <div class="hero-actions hero-anim hero-anim-4">
         <a href={`${b}gallery`} class="btn btn-primary">View Gallery</a>
         <a href={`${b}contact`} class="btn btn-outline">Inquire</a>
       </div>
     </div>
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span></span>
+    </div>
   </section>
 
+  <!-- ========== STATS BAR ========== -->
   <div class="stats-bar" aria-label="Key figures">
     <div class="container">
       <div class="stats-grid">
         <div class="stat-item fade-in">
-          <div class="stat-value">656<span>hp</span></div>
+          <div class="stat-value" data-count="656" data-suffix="hp">0<span>hp</span></div>
           <div class="stat-label">Twin-Turbo V8</div>
         </div>
         <div class="stat-item fade-in fade-in-delay-1">
-          <div class="stat-value">2,519</div>
+          <div class="stat-value" data-count="2519" data-format="comma">0</div>
           <div class="stat-label">Miles on Odometer</div>
         </div>
         <div class="stat-item fade-in fade-in-delay-2">
-          <div class="stat-value">$199.5<span>k</span></div>
+          <div class="stat-value">$199,007</div>
           <div class="stat-label">Asking Price</div>
         </div>
       </div>
     </div>
   </div>
 
-  <section class="overview">
-    <div class="container">
-      <div class="overview-grid">
-        <div class="overview-text fade-in">
-          <p class="label">Why This Car</p>
-          <h2>The New-Generation Vantage</h2>
-          <p>This is the completely redesigned Vantage — launched for 2025 with a <strong>155hp increase</strong> over the outgoing model, a new interior, and a chassis that reviewers have called the best-driving Aston Martin in a decade.</p>
-          <p>Jet Black over Onyx Black Haircalf Leather with AMR Lime accents is a striking, tasteful spec. At <strong>$199,500</strong>, this represents a $23,300 saving over the original sticker on an essentially unworn car.</p>
-          <p>Original owner. Clean title in hand. <strong>3-year unlimited-mileage factory warranty</strong> transfers to the new owner at no cost.</p>
-          <a href={`${b}specs`} class="btn btn-outline" style="margin-top:1rem;">Full Specifications</a>
+  <!-- ========== THE EXPERIENCE (parallax video section) ========== -->
+  <section class="experience" aria-label="The experience">
+    <div class="experience-video-wrap">
+      <video autoplay muted loop playsinline aria-hidden="true">
+        <source src={`${b}videos/outside/IMG_8202.mp4`} type="video/mp4" />
+      </video>
+    </div>
+    <div class="experience-overlay"></div>
+    <div class="experience-content">
+      <p class="label slide-up">Why This Car</p>
+      <h2 class="slide-up slide-up-delay-1">The New-Generation Vantage</h2>
+      <p class="experience-body slide-up slide-up-delay-2">The completely redesigned Vantage — launched for 2025 with a <strong>155hp increase</strong> over the outgoing model, a new interior, and a chassis that reviewers have called the best-driving Aston Martin in a decade.</p>
+      <p class="experience-body slide-up slide-up-delay-3">Jet Black over Onyx Black Haircalf Leather with AMR Lime accents. At <strong>$199,007</strong>, this represents a $23,793 saving over the original sticker on an essentially unworn car.</p>
+      <div class="experience-badges slide-up slide-up-delay-3">
+        <div class="experience-badge">
+          <span class="experience-badge-value">3yr</span>
+          <span class="experience-badge-label">Unlimited-Mileage Warranty</span>
         </div>
-        <div class="overview-image fade-in fade-in-delay-1">
-          <img src={`${b}photos/IMG_8136.JPG`} alt="2026 Aston Martin Vantage — Jet Black, front three-quarter view" loading="lazy" />
+        <div class="experience-badge">
+          <span class="experience-badge-value">1st</span>
+          <span class="experience-badge-label">Original Owner &middot; Clean Title</span>
+        </div>
+      </div>
+      <a href={`${b}specs`} class="btn btn-outline slide-up slide-up-delay-3" style="margin-top:1.5rem;">Full Specifications</a>
+    </div>
+  </section>
+
+  <!-- ========== FILM CAROUSEL ========== -->
+  <section class="film-section">
+    <div class="container">
+      <div class="section-header slide-up">
+        <p class="label">Film</p>
+        <h2>In Motion</h2>
+      </div>
+    </div>
+    <div class="film-carousel" role="region" aria-label="Video clips">
+      <div class="film-track">
+        {filmClips.map((clip) => (
+          <div class="film-card" data-src={clip.src} tabindex="0" role="button">
+            <div class="film-card-inner">
+              <img src={clip.thumb} alt={clip.label} loading="lazy" />
+              <video muted loop playsinline preload="none" aria-hidden="true">
+                <source src={clip.src} type="video/mp4" />
+              </video>
+              <div class="film-card-play">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="12" r="11" fill="rgba(0,0,0,0.5)" stroke="rgba(255,255,255,0.4)" stroke-width="0.5"/>
+                  <path d="M9.5 7.5l7 4.5-7 4.5V7.5z"/>
+                </svg>
+              </div>
+            </div>
+            <span class="film-card-label">{clip.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== INTERIOR SHOWCASE ========== -->
+  <section class="interior" aria-label="Interior">
+    <div class="interior-video-wrap">
+      <video autoplay muted loop playsinline aria-hidden="true">
+        <source src={`${b}videos/inside/IMG_7072.mp4`} type="video/mp4" />
+      </video>
+    </div>
+    <div class="interior-overlay"></div>
+    <div class="interior-content">
+      <p class="label slide-up">Step Inside</p>
+      <h2 class="slide-up slide-up-delay-1">Handcrafted Interior</h2>
+      <div class="interior-features">
+        <div class="interior-feature slide-up slide-up-delay-2">
+          <h3>Onyx Haircalf Leather</h3>
+          <p>Full leather interior with AMR Lime contrast stitching and Alcantara headliner</p>
+        </div>
+        <div class="interior-feature slide-up slide-up-delay-2">
+          <h3>10.25" Infotainment</h3>
+          <p>Touchscreen display with wireless Apple CarPlay, Android Auto, and Aston Martin HMI</p>
+        </div>
+        <div class="interior-feature slide-up slide-up-delay-3">
+          <h3>12-Way Power Sport Seats</h3>
+          <p>Heated, ventilated, and memory-equipped with power lumbar and side bolsters</p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ========== GALLERY PREVIEW ========== -->
   <section class="preview-grid-section">
     <div class="container">
-      <div class="section-header fade-in">
+      <div class="section-header slide-up">
         <p class="label">Gallery Preview</p>
         <h2>Jet Black &amp; AMR Lime</h2>
       </div>
-      <div class="preview-grid fade-in">
-        <div class="preview-grid-wrap"><img src={`${b}photos/IMG_8137.JPG`} alt="Aston Martin Vantage badge and grille" loading="lazy" /></div>
+      <div class="preview-grid slide-up">
+        <div class="preview-grid-wrap preview-wide"><img src={`${b}photos/IMG_8172.JPG`} alt="Aston Martin Vantage driver profile" loading="lazy" /></div>
+        <div class="preview-grid-wrap"><img src={`${b}photos/IMG_8140.JPG`} alt="21-inch forged wheel and yellow brake caliper" loading="lazy" /></div>
         <div class="preview-grid-wrap"><img src={`${b}photos/IMG_8167.JPG`} alt="4.0L twin-turbo V8 engine bay" loading="lazy" /></div>
-        <div class="preview-grid-wrap"><img src={`${b}photos/IMG_8190.JPG`} alt="Aston Martin Vantage at dusk" loading="lazy" /></div>
+        <div class="preview-grid-wrap preview-wide"><img src={`${b}photos/IMG_8190.JPG`} alt="Aston Martin Vantage at dusk" loading="lazy" /></div>
         <div class="preview-grid-wrap"><img src={`${b}photos/IMG_8196.JPG`} alt="Aston Martin Vantage headlights on" loading="lazy" /></div>
+        <div class="preview-grid-wrap"><img src={`${b}photos/IMG_8137.JPG`} alt="Aston Martin Vantage badge and grille" loading="lazy" /></div>
       </div>
-      <div class="text-center fade-in">
+      <div class="text-center slide-up" style="margin-top: 3rem;">
         <a href={`${b}gallery`} class="btn btn-primary">View Full Gallery</a>
       </div>
     </div>
   </section>
 
+  <!-- ========== FOOTER ========== -->
   <footer>
     <div class="container">
       <p class="footer-logo">Vantage</p>
@@ -98,6 +195,14 @@ const b = import.meta.env.BASE_URL;
       <p style="margin-top:0.5rem;">Chicagoland, IL &nbsp;&middot;&nbsp; Private Sale &nbsp;&middot;&nbsp; <a href={`${b}contact`} style="color:var(--lime);">Contact for Inquiries</a></p>
     </div>
   </footer>
+
+  <!-- Video Modal (shared) -->
+  <div id="videoModal" class="video-modal" role="dialog" aria-modal="true" aria-label="Video player">
+    <button class="video-modal-close" aria-label="Close video">&times;</button>
+    <div class="video-modal-inner">
+      <video controls playsinline></video>
+    </div>
+  </div>
 
   <!-- Hero Background Music -->
   <audio id="heroMusic" loop preload="auto">
@@ -116,6 +221,138 @@ const b = import.meta.env.BASE_URL;
 
   <script>
   (function () {
+    /* ---- Hero Video Crossfade ---- */
+    const vids = document.querySelectorAll('.hero-vid') as NodeListOf<HTMLVideoElement>;
+    if (vids.length > 1) {
+      let active = 0;
+      const INTERVAL = 8000;
+
+      function preloadNext(idx: number) {
+        const v = vids[idx] as HTMLVideoElement;
+        if (v.preload === 'none') {
+          v.preload = 'auto';
+          v.load();
+        }
+      }
+
+      function switchTo(nextIdx: number) {
+        const curr = vids[active] as HTMLVideoElement;
+        const next = vids[nextIdx] as HTMLVideoElement;
+        vids.forEach((v, i) => { if (i !== active && i !== nextIdx) { (v as HTMLVideoElement).pause(); } });
+        next.currentTime = 0;
+        next.play().catch(() => {});
+        next.classList.add('hero-vid--active');
+        curr.classList.remove('hero-vid--active');
+        active = nextIdx;
+        const upcoming = (nextIdx + 1) % vids.length;
+        setTimeout(() => preloadNext(upcoming), INTERVAL - 2000);
+      }
+
+      // Pre-buffer video 2 so it's ready at the first switch
+      preloadNext(1);
+
+      // First transition at 3s — 1s fade starts during buildup, lands on drum hit at 4s
+      setTimeout(() => {
+        switchTo(1);
+        // Then continue on the normal 8s rotation
+        setInterval(() => {
+          switchTo((active + 1) % vids.length);
+        }, INTERVAL);
+      }, 3000);
+    }
+
+    /* ---- Stats Counter Animation ---- */
+    const counters = document.querySelectorAll('[data-count]');
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target as HTMLElement;
+        const target = parseFloat(el.dataset.count || '0');
+        const prefix = el.dataset.prefix || '';
+        const suffix = el.dataset.suffix || '';
+        const format = el.dataset.format;
+        const isDecimal = target % 1 !== 0;
+        const duration = 2000;
+        const start = performance.now();
+
+        function tick(now: number) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          let val = target * eased;
+
+          let display: string;
+          if (isDecimal) {
+            display = val.toFixed(1);
+          } else if (format === 'comma') {
+            display = Math.round(val).toLocaleString();
+          } else {
+            display = Math.round(val).toString();
+          }
+
+          el.innerHTML = prefix + display + (suffix ? `<span>${suffix}</span>` : '');
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        counterObserver.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(c => counterObserver.observe(c));
+
+    /* ---- Film Carousel: hover video preview ---- */
+    document.querySelectorAll('.film-card').forEach(card => {
+      const vid = card.querySelector('video') as HTMLVideoElement;
+      const img = card.querySelector('img') as HTMLImageElement;
+      if (!vid) return;
+
+      card.addEventListener('mouseenter', () => {
+        vid.currentTime = 0;
+        vid.play().catch(() => {});
+        vid.style.opacity = '1';
+        img.style.opacity = '0';
+      });
+      card.addEventListener('mouseleave', () => {
+        vid.pause();
+        vid.style.opacity = '0';
+        img.style.opacity = '1';
+      });
+
+      card.addEventListener('click', () => {
+        const src = (card as HTMLElement).dataset.src;
+        const modal = document.getElementById('videoModal');
+        const modalVid = modal?.querySelector('video');
+        if (modal && modalVid && src) {
+          modalVid.src = src;
+          modal.classList.add('open');
+          modalVid.play().catch(() => {});
+        }
+      });
+    });
+
+    /* ---- Video Modal Close ---- */
+    const modal = document.getElementById('videoModal');
+    const modalClose = modal?.querySelector('.video-modal-close');
+    const modalVid = modal?.querySelector('video');
+    function closeModal() {
+      modal?.classList.remove('open');
+      if (modalVid) { modalVid.pause(); modalVid.src = ''; }
+    }
+    modalClose?.addEventListener('click', closeModal);
+    modal?.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+    /* ---- Slide-up scroll animations ---- */
+    const slideObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          (entry.target as HTMLElement).classList.add('visible');
+          slideObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.slide-up').forEach(el => slideObserver.observe(el));
+
+    /* ---- Hero Music ---- */
     const audio   = document.getElementById('heroMusic') as HTMLAudioElement;
     const btn     = document.getElementById('heroMusicBtn') as HTMLButtonElement;
     const iconOn  = document.getElementById('musicIconOn') as SVGElement;
@@ -156,9 +393,8 @@ const b = import.meta.env.BASE_URL;
       }
     }
 
-    ['click', 'scroll', 'keydown', 'touchstart'].forEach(evt => {
-      window.addEventListener(evt, startMusic, { once: true, passive: true });
-    });
+    // Start music immediately on page load
+    startMusic();
 
     btn.addEventListener('click', (e) => { e.stopPropagation(); toggleMute(); });
   })();
