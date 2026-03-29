@@ -204,21 +204,6 @@ const filmClips = [
     </div>
   </div>
 
-  <!-- Hero Background Music -->
-  <audio id="heroMusic" loop preload="auto">
-    <source src={`${b}audio/hero_music.mp3`} type="audio/mpeg" />
-  </audio>
-
-  <button id="heroMusicBtn" class="hero-music-btn" aria-label="Toggle background music" title="Toggle music">
-    <svg id="musicIconOn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
-      <path d="M9 3v10.55A4 4 0 1 0 11 17V7h4V3H9z"/>
-    </svg>
-    <svg id="musicIconOff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16" style="display:none">
-      <path d="M9 3v10.55A4 4 0 1 0 11 17V7h4V3H9z" opacity="0.3"/>
-      <line x1="3" y1="3" x2="21" y2="21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-    </svg>
-  </button>
-
   <script>
   (function () {
     /* ---- Hero Video Crossfade ---- */
@@ -352,57 +337,6 @@ const filmClips = [
     }, { threshold: 0.1 });
     document.querySelectorAll('.slide-up').forEach(el => slideObserver.observe(el));
 
-    /* ---- Hero Music ---- */
-    const audio   = document.getElementById('heroMusic') as HTMLAudioElement;
-    const btn     = document.getElementById('heroMusicBtn') as HTMLButtonElement;
-    const iconOn  = document.getElementById('musicIconOn') as SVGElement;
-    const iconOff = document.getElementById('musicIconOff') as SVGElement;
-    let   started = false;
-    let   muted   = false;
-
-    audio.volume = 0;
-
-    function fadeIn() {
-      let v = 0;
-      const tick = setInterval(() => {
-        v = Math.min(v + 0.02, 0.32);
-        audio.volume = v;
-        if (v >= 0.32) clearInterval(tick);
-      }, 80);
-    }
-
-    function startMusic() {
-      if (started) return;
-      started = true;
-      audio.play().then(fadeIn).catch(() => { started = false; });
-      btn.classList.add('visible');
-    }
-
-    function toggleMute() {
-      muted = !muted;
-      if (muted) {
-        audio.volume = 0;
-        iconOn.style.display  = 'none';
-        iconOff.style.display = '';
-        btn.style.opacity = '0.45';
-      } else {
-        fadeIn();
-        iconOn.style.display  = '';
-        iconOff.style.display = 'none';
-        btn.style.opacity = '1';
-      }
-    }
-
-    // Autoplay on page load — retry until browser allows it
-    startMusic();
-    let retryCount = 0;
-    const retryTimer = setInterval(() => {
-      if (started || retryCount > 50) { clearInterval(retryTimer); return; }
-      retryCount++;
-      startMusic();
-    }, 200);
-
-    btn.addEventListener('click', (e) => { e.stopPropagation(); toggleMute(); });
   })();
   </script>
 

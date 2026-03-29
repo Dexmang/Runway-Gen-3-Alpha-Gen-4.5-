@@ -35,5 +35,98 @@ const base = import.meta.env.BASE_URL;
   <body>
     <slot />
     <script src="../scripts/main.js"></script>
+
+    <!-- Site-wide background music — persists across page navigations -->
+    <audio id="siteMusic" loop preload="auto" data-base={base}>
+      <source src={`${base}audio/hero_music.mp3`} type="audio/mpeg" />
+    </audio>
+
+    <button id="siteMusicBtn" class="hero-music-btn" aria-label="Toggle background music" title="Toggle music">
+      <svg id="musicIconOn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+        <path d="M9 3v10.55A4 4 0 1 0 11 17V7h4V3H9z"/>
+      </svg>
+      <svg id="musicIconOff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16" style="display:none">
+        <path d="M9 3v10.55A4 4 0 1 0 11 17V7h4V3" opacity="0.3"/>
+        <line x1="3" y1="3" x2="21" y2="21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <script>
+    (function initSiteMusic() {
+      const audio   = document.getElementById('siteMusic');
+      const btn     = document.getElementById('siteMusicBtn');
+      const iconOn  = document.getElementById('musicIconOn');
+      const iconOff = document.getElementById('musicIconOff');
+      if (!audio || !btn) return;
+
+      // If already playing (persisted across navigation), just show button
+      if (!audio.paused) {
+        btn.classList.add('visible');
+        return;
+      }
+
+      let started = false;
+      let muted   = false;
+      audio.volume = 0;
+
+      function fadeIn() {
+        let v = 0;
+        const tick = setInterval(() => {
+          v = Math.min(v + 0.02, 0.32);
+          audio.volume = v;
+          if (v >= 0.32) clearInterval(tick);
+        }, 80);
+      }
+
+      function startMusic() {
+        if (started) return;
+        started = true;
+        audio.play().then(() => {
+          fadeIn();
+          btn.classList.add('visible');
+        }).catch(() => { started = false; });
+      }
+
+      function toggleMute() {
+        muted = !muted;
+        if (muted) {
+          audio.volume = 0;
+          if (iconOn) iconOn.style.display  = 'none';
+          if (iconOff) iconOff.style.display = '';
+          btn.style.opacity = '0.45';
+        } else {
+          fadeIn();
+          if (iconOn) iconOn.style.display  = '';
+          if (iconOff) iconOff.style.display = 'none';
+          btn.style.opacity = '1';
+        }
+      }
+
+      // Attempt autoplay immediately
+      startMusic();
+
+      // Fallback: start on ANY user interaction (click, scroll, touch, keydown)
+      function onInteract() {
+        startMusic();
+        if (started) {
+          document.removeEventListener('click', onInteract, true);
+          document.removeEventListener('scroll', onInteract, true);
+          document.removeEventListener('touchstart', onInteract, true);
+          document.removeEventListener('keydown', onInteract, true);
+        }
+      }
+      document.addEventListener('click', onInteract, true);
+      document.addEventListener('scroll', onInteract, true);
+      document.addEventListener('touchstart', onInteract, true);
+      document.addEventListener('keydown', onInteract, true);
+
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (!started) { startMusic(); return; }
+        toggleMute();
+      });
+    })();
+
+    </script>
   </body>
 </html>
