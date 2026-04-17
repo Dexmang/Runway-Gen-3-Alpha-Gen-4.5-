@@ -1,9 +1,9 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
+# Disabled 2026-04-17: vault007.com now deploys via Vercel. GH Pages retired.
+# Manual trigger only kept for emergencies.
 
 permissions:
   contents: read
