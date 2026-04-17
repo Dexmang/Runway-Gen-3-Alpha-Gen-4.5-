@@ -8,7 +8,7 @@ interface Props {
 
 const {
   title,
-  description = '2026 Aston Martin Vantage Coupe. 656hp. 2,519 miles. Jet Black over Onyx Haircalf. $199,007. Full factory warranty. Private sale, Chicagoland.',
+  description = 'Vault 007. 2026 Aston Martin Vantage Coupe. 656hp. 2,519 miles. Jet Black over Onyx Haircalf. Asking $199,007. Full factory warranty. Private sale, North Shore Chicago.',
 } = Astro.props;
 
 const base = import.meta.env.BASE_URL;
@@ -23,8 +23,25 @@ const base = import.meta.env.BASE_URL;
     <meta name="description" content={description} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={`${base}hero_poster.jpg`} />
+    <meta property="og:image" content="https://vault007.com/hero_poster.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content={`https://vault007.com${Astro.url.pathname}`} />
     <meta property="og:type" content="website" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://vault007.com/hero_poster.jpg" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={`https://vault007.com${Astro.url.pathname}`} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <link rel="icon" type="image/x-icon" href={`${base}favicon.ico`} />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -36,7 +53,7 @@ const base = import.meta.env.BASE_URL;
     <slot />
     <script src="../scripts/main.js"></script>
 
-    <!-- Site-wide background music — persists across page navigations -->
+    <!-- Site-wide background music. Persists across page navigations. -->
     <audio id="siteMusic" loop preload="auto" data-base={base}>
       <source src={`${base}audio/hero_music.mp3`} type="audio/mpeg" />
     </audio>
@@ -102,24 +119,10 @@ const base = import.meta.env.BASE_URL;
         }
       }
 
-      // Attempt autoplay immediately
-      startMusic();
+      // Autoplay disabled — music plays only when user clicks the ♪ button
+      // startMusic();
 
-      // Fallback: start on ANY user interaction (click, scroll, touch, keydown)
-      function onInteract() {
-        startMusic();
-        if (started) {
-          document.removeEventListener('click', onInteract, true);
-          document.removeEventListener('scroll', onInteract, true);
-          document.removeEventListener('touchstart', onInteract, true);
-          document.removeEventListener('keydown', onInteract, true);
-        }
-      }
-      document.addEventListener('click', onInteract, true);
-      document.addEventListener('scroll', onInteract, true);
-      document.addEventListener('touchstart', onInteract, true);
-      document.addEventListener('keydown', onInteract, true);
-
+      // Music only starts when user clicks the ♪ button
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         if (!started) { startMusic(); return; }

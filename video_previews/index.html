@@ -1,0 +1,68 @@
+<!DOCTYPE html><html><head><style>
+body{background:#111;color:#fff;font-family:sans-serif;margin:0;padding:20px}
+h1{text-align:center;font-size:1.4rem;color:#C5D932;margin-bottom:8px}
+p.sub{text-align:center;color:#888;font-size:0.8rem;margin-bottom:24px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.card{background:#1a1a1a;border:2px solid transparent;border-radius:4px;overflow:hidden;cursor:pointer;transition:border-color .2s}
+.card:hover{border-color:#C5D932}
+.card.selected{border-color:#C5D932;box-shadow:0 0 12px rgba(197,217,50,0.4)}
+.card img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.card .info{padding:8px 10px;font-size:0.75rem}
+.card .name{color:#fff;font-weight:600}
+.card .dur{color:#888;margin-top:2px}
+.current{color:#C5D932;font-size:0.65rem;margin-top:2px}
+</style></head><body>
+<h1>Exterior Video Clips — Pick Your Hero</h1>
+<p class="sub">Current hero: IMG_8121 (walkaround, 10.6s). Click a clip to select it.</p>
+<div class="grid" id="grid"></div>
+<script>
+const clips = [
+{name:'IMG_8121',dur:'10.556667s'},
+{name:'IMG_8122',dur:'11.140000s'},
+{name:'IMG_8131',dur:'12.158333s'},
+{name:'IMG_8135',dur:'6.720000s'},
+{name:'IMG_8143',dur:'5.436667s'},
+{name:'IMG_8144',dur:'7.571667s'},
+{name:'IMG_8145',dur:'9.990000s'},
+{name:'IMG_8148',dur:'13.946667s'},
+{name:'IMG_8153',dur:'14.313333s'},
+{name:'IMG_8155',dur:'16.195000s'},
+{name:'IMG_8157',dur:'7.738333s'},
+{name:'IMG_8158',dur:'22.763333s'},
+{name:'IMG_8159',dur:'5.938333s'},
+{name:'IMG_8163',dur:'6.271667s'},
+{name:'IMG_8164',dur:'6.738333s'},
+{name:'IMG_8165',dur:'5.086667s'},
+{name:'IMG_8166',dur:'6.736667s'},
+{name:'IMG_8169',dur:'7.673333s'},
+{name:'IMG_8170',dur:'7.506667s'},
+{name:'IMG_8171',dur:'11.056667s'},
+{name:'IMG_8177',dur:'6.638333s'},
+{name:'IMG_8178',dur:'9.425000s'},
+{name:'IMG_8181',dur:'6.421667s'},
+{name:'IMG_8182',dur:'8.341667s'},
+{name:'IMG_8183',dur:'5.420000s'},
+{name:'IMG_8184',dur:'8.273333s'},
+{name:'IMG_8185',dur:'8.541667s'},
+{name:'IMG_8187',dur:'8.600000s'},
+{name:'IMG_8188',dur:'5.205000s'},
+{name:'IMG_8189',dur:'4.503333s'},
+{name:'IMG_8200',dur:'10.276667s'},
+{name:'IMG_8201',dur:'5.688333s'},
+{name:'IMG_8202',dur:'7.736667s'},
+{name:'IMG_8203',dur:'6.770000s'},
+{name:'IMG_8206',dur:'38.670000s'},
+{name:'IMG_8207',dur:'10.833333s'},
+];
+const grid = document.getElementById('grid');
+clips.forEach(c => {
+  const card = document.createElement('div');
+  card.className = 'card' + (c.name === 'IMG_8121' ? ' selected' : '');
+  card.innerHTML = `<img src="${c.name}.jpg" alt="${c.name}"><div class="info"><div class="name">${c.name}</div><div class="dur">${c.dur}</div>${c.name==='IMG_8121'?'<div class="current">★ CURRENT HERO</div>':''}</div>`;
+  card.onclick = () => {
+    document.querySelectorAll('.card').forEach(x=>x.classList.remove('selected'));
+    card.classList.add('selected');
+  };
+  grid.appendChild(card);
+});
+</script></body></html>
