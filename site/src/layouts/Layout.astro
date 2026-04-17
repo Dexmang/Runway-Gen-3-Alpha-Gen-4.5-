@@ -54,7 +54,7 @@ const base = import.meta.env.BASE_URL;
     <script src="../scripts/main.js"></script>
 
     <!-- Site-wide background music. Persists across page navigations. -->
-    <audio id="siteMusic" loop preload="auto" data-base={base}>
+    <audio id="siteMusic" autoplay muted loop playsinline preload="auto" data-base={base}>
       <source src={`${base}audio/hero_music.mp3`} type="audio/mpeg" />
     </audio>
 
@@ -76,57 +76,78 @@ const base = import.meta.env.BASE_URL;
       const iconOff = document.getElementById('musicIconOff');
       if (!audio || !btn) return;
 
-      // If already playing (persisted across navigation), just show button
-      if (!audio.paused) {
-        btn.classList.add('visible');
-        return;
+      const TARGET_VOL = 0.32;
+      const FADE_MS    = 1500;
+
+      // Visual state helpers
+      function showOnIcon() {
+        if (iconOn)  iconOn.style.display  = '';
+        if (iconOff) iconOff.style.display = 'none';
+        btn.style.opacity = '1';
+      }
+      function showOffIcon() {
+        if (iconOn)  iconOn.style.display  = 'none';
+        if (iconOff) iconOff.style.display = '';
+        btn.style.opacity = '0.45';
       }
 
-      let started = false;
-      let muted   = false;
+      // Smooth fade from current volume to a target over duration ms
+      let fadeRaf = 0;
+      function fadeTo(target, duration) {
+        cancelAnimationFrame(fadeRaf);
+        const start    = performance.now();
+        const startVol = audio.volume;
+        const delta    = target - startVol;
+        const step = (now) => {
+          const p = Math.min(1, (now - start) / duration);
+          audio.volume = Math.max(0, Math.min(1, startVol + delta * p));
+          if (p < 1) fadeRaf = requestAnimationFrame(step);
+        };
+        fadeRaf = requestAnimationFrame(step);
+      }
+
+      // Initial state: muted autoplay attempt (browsers permit muted autoplay)
+      audio.muted  = true;
       audio.volume = 0;
+      showOffIcon();
+      audio.play().catch(() => { /* swallow — toggle button still works */ });
 
-      function fadeIn() {
-        let v = 0;
-        const tick = setInterval(() => {
-          v = Math.min(v + 0.02, 0.32);
-          audio.volume = v;
-          if (v >= 0.32) clearInterval(tick);
-        }, 80);
+      // First user interaction unmutes with a smooth fade-in.
+      // If user already used the toggle, dataset.userInteracted is set and we skip.
+      function autoUnmute() {
+        if (audio.dataset.userInteracted === '1') return cleanupAutoUnmute();
+        audio.dataset.userInteracted = '1';
+        audio.muted = false;
+        // Make sure it's actually playing (mobile sometimes refuses muted autoplay too)
+        audio.play().catch(() => {});
+        fadeTo(TARGET_VOL, FADE_MS);
+        showOnIcon();
+        cleanupAutoUnmute();
       }
-
-      function startMusic() {
-        if (started) return;
-        started = true;
-        audio.play().then(() => {
-          fadeIn();
-          btn.classList.add('visible');
-        }).catch(() => { started = false; });
+      const evs = ['click', 'scroll', 'keydown', 'touchstart', 'mousemove'];
+      function cleanupAutoUnmute() {
+        evs.forEach(e => document.removeEventListener(e, autoUnmute));
       }
+      evs.forEach(e => document.addEventListener(e, autoUnmute, { once: true, passive: true }));
 
-      function toggleMute() {
-        muted = !muted;
-        if (muted) {
-          audio.volume = 0;
-          if (iconOn) iconOn.style.display  = 'none';
-          if (iconOff) iconOff.style.display = '';
-          btn.style.opacity = '0.45';
-        } else {
-          fadeIn();
-          if (iconOn) iconOn.style.display  = '';
-          if (iconOff) iconOff.style.display = 'none';
-          btn.style.opacity = '1';
-        }
-      }
-
-      // Autoplay disabled — music plays only when user clicks the ♪ button
-      // startMusic();
-
-      // Music only starts when user clicks the ♪ button
+      // Toggle button — mute / unmute manually.
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
-        if (!started) { startMusic(); return; }
-        toggleMute();
+        // Mark that user has explicitly interacted; suppress further auto behavior
+        audio.dataset.userInteracted = '1';
+        cleanupAutoUnmute();
+
+        if (audio.muted || audio.volume === 0) {
+          audio.muted = false;
+          if (audio.paused) audio.play().catch(() => {});
+          fadeTo(TARGET_VOL, 600);
+          showOnIcon();
+        } else {
+          fadeTo(0, 400);
+          // After fade, hard mute so it doesn't sneak back up
+          setTimeout(() => { audio.muted = true; }, 450);
+          showOffIcon();
+        }
       });
     })();
 
